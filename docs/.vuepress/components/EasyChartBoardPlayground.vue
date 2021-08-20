@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <select>
       <option value="">환자 데이터</option>
       <option value="">자동차 데이터</option>
@@ -17,8 +17,10 @@
 
 <script>
 export default {
-  name: 'App',
-};
+
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+
+</style>
