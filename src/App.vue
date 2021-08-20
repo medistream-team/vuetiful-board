@@ -1,28 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <select>
+      <option value="">환자 데이터</option>
+      <option value="">자동차 데이터</option>
+    </select>
+    <select>
+      <option value="">라이트 테마</option>
+      <option value="">다크 테마</option>
+    </select>
+    <button @click="color = 'red'">change to red</button>
+    <easy-chart-board
+      :options="{ datasets: [], theme: 'dark', layoutInfo: {} }"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss" scoped></style>

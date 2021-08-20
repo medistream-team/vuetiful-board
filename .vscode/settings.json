@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.autoClosingBrackets": "always",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.autoClosingBrackets": "always"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.autoClosingBrackets": "always"
+  },
+  "eslint.validate": ["javascript", "vue"],
+  "vetur.validation.template": false,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  }
+}
