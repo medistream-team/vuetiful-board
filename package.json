@@ -24,6 +24,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.38.0",
     "sass-loader": "^10.2.0",
+    "vue-apexcharts": "^1.6.2",
     "vue-router": "^3.5.2",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.8.2"
