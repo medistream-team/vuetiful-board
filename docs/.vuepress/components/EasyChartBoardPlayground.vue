@@ -1,10 +1,10 @@
 <template>
   <div>
     <easy-chart-board
-      :series="[
+      :datasets="[
         {
           id: this.$utils.generateUniqueId(),
-          data: [
+          series: [
             {
               name: '간판',
               data: [27, 38, 19, 26, 19, 31, 27, 20, 28, 36, 37, 38],
@@ -34,46 +34,10 @@
               data: [45, 1, 4, 7, 8, 7, 5, 3, 6, 4, 1, 1],
             },
           ],
-        },
-        {
-          id: this.$utils.generateUniqueId(),
-          data: [
-            186, 93, 30, 20, 21, 4, 20
-          ],
-        },
-        {
-          id: this.$utils.generateUniqueId(),
-          data: [
-            {
-              name: '총 진료비 (2019)',
-              type: 'column',
-              data: [46632870, 41584730, 52955270, 48567390, 58018330, 55539980, 58520700, 49065550, 50117730, 58495400, 48557530, 48517400],
-            },
-            {
-              name: '총 진료비 (2020)',
-              type: 'column',
-              data: [39924170, 41147250, 35482200, 40162390, 67997690, 64065550, 49789670, 46006220, 47063870, 50758110, 47677190, 49274240]
-            },
-            {
-              name: '성장률 (2019)',
-              type: 'line',
-              data: [null, null, null, null, null, null, null, null, 160, 34, 13, 32]
-            },
-            {
-              name: '성장률 (2020)',
-              type: 'line',
-              data: [-14, -1, -33, -17, 17, 15, -15, -6, -6, -13, -2, 2]
-            },
-          ],
-        },
-      ]"
-      :options="{
-        datasets: [
-          {
+          options: {
             id: this.$utils.generateUniqueId(),
             chart: {
               type: 'bar',
-              height: 350,
               stacked: true,
               stackType: '100%',
             },
@@ -81,10 +45,6 @@
               bar: {
                 horizontal: true,
               },
-            },
-            stroke: {
-              width: 1,
-              colors: ['#fff'],
             },
             title: {
               text: '최근 유입 경로 추이',
@@ -116,15 +76,15 @@
             legend: {
               position: 'bottom'
             },
-          },
-          {
+          }
+        },
+        {
+          id: this.$utils.generateUniqueId(),
+          series: [186, 93, 30, 20, 21, 4, 20],
+          options: {
             id: this.$utils.generateUniqueId(),
-            type: 'pie',
-            options: {
-              chart: {
-                type: 'pie',
-                height: 350,
-              },
+            chart: {
+              type: 'pie',
             },
             title: {
               text: '최근 유입 경로 (2021년)',
@@ -149,10 +109,45 @@
             legend: {
               position: 'bottom',
             }
-          },
-          {
+          }
+        },
+        {
+          id: this.$utils.generateUniqueId(),
+          series: [
+            {
+              name: '총 진료비 (2019)',
+              type: 'column',
+              data: [46632870, 41584730, 52955270, 48567390, 58018330, 55539980, 58520700, 49065550, 50117730, 58495400, 48557530, 48517400],
+            },
+            {
+              name: '총 진료비 (2020)',
+              type: 'column',
+              data: [39924170, 41147250, 35482200, 40162390, 67997690, 64065550, 49789670, 46006220, 47063870, 50758110, 47677190, 49274240]
+            },
+            {
+              name: '성장률 (2019)',
+              type: 'line',
+              data: [null, null, null, null, null, null, null, null, 160, 34, 13, 32]
+            },
+            {
+              name: '성장률 (2020)',
+              type: 'line',
+              data: [-14, -1, -33, -17, 17, 15, -15, -6, -6, -13, -2, 2]
+            },
+          ],
+          options: {
             id: this.$utils.generateUniqueId(),
-            type: 'line',
+            chart: {
+              type: 'line',
+            },
+            title: {
+              text: '총 진료비',
+              align: 'center',
+              style: {
+                fontSize: '18px',
+                fontWeight: 'bold',
+              },
+            },
             xaxis: {
               categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
               labels: {
@@ -201,8 +196,8 @@
               position: 'bottom',
             }
           }
-        ]
-      }"
+        },
+      ]"
     />
   </div>
 </template>
@@ -212,6 +207,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style lang="scss" scoped></style>

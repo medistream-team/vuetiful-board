@@ -1,11 +1,11 @@
 <template>
   <div>
     <apex-charts
-      v-for="(item, index) in options.datasets"
+      v-for="item in datasets"
       :key="item.id"
-      :type="item.type"
-      :series="series[index].data"
-      :options="item"
+      :type="item.options.type"
+      :series="item.series"
+      :options="item.options"
     />
   </div>
 </template>
@@ -13,24 +13,10 @@
 <script>
 export default {
   props: {
-    type: {
-      type: String,
-      require: true,
-      default: '',
-    },
-    series: {
+    datasets: {
       type: Array,
-      required: true,
-      default() {
-        return [];
-      },
-    },
-    options: {
-      type: Object,
-      required: true,
-      default() {
-        return {};
-      },
+      require: true,
+      default: () => [],
     },
   },
 };
