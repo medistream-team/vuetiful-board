@@ -11,12 +11,7 @@
 </template>
 
 <script>
-import apexCharts from 'vue-apexcharts';
-
 export default {
-  components: {
-    apexCharts,
-  },
   props: {
     type: {
       type: String,
