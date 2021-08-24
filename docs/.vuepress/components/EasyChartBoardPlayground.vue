@@ -3,7 +3,7 @@
     <easy-chart-board
       :series="[
         {
-          id: this.generateUniqueId(),
+          id: this.$utils.generateUniqueId(),
           data: [
             {
               name: '간판',
@@ -36,13 +36,13 @@
           ],
         },
         {
-          id: this.generateUniqueId(),
+          id: this.$utils.generateUniqueId(),
           data: [
             186, 93, 30, 20, 21, 4, 20
           ],
         },
         {
-          id: this.generateUniqueId(),
+          id: this.$utils.generateUniqueId(),
           data: [
             {
               name: '총 진료비 (2019)',
@@ -70,7 +70,7 @@
       :options="{
         datasets: [
           {
-            id: this.generateUniqueId(),
+            id: this.$utils.generateUniqueId(),
             chart: {
               type: 'bar',
               height: 350,
@@ -118,7 +118,7 @@
             },
           },
           {
-            id: this.generateUniqueId(),
+            id: this.$utils.generateUniqueId(),
             type: 'pie',
             options: {
               chart: {
@@ -151,7 +151,7 @@
             }
           },
           {
-            id: this.generateUniqueId(),
+            id: this.$utils.generateUniqueId(),
             type: 'line',
             xaxis: {
               categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -208,16 +208,7 @@
 </template>
 
 <script>
-import EasyChartBoard from '../../../src/components/EasyChartBoard'
-import { generateUniqueId } from '../../../src/js/utils'
-
 export default {
-  components: {
-    EasyChartBoard
-  },
-  methods: {
-    generateUniqueId,
-  },
 }
 </script>
 
