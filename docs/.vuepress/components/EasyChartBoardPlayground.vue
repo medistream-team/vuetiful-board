@@ -3,7 +3,7 @@
     <easy-chart-board
       :datasets="[
         {
-          id: this.$utils.generateUniqueId(),
+          id: this.$uuid.v4(),
           series: [
             {
               name: '간판',
@@ -35,7 +35,7 @@
             },
           ],
           options: {
-            id: this.$utils.generateUniqueId(),
+            id: this.$uuid.v4(),
             chart: {
               type: 'bar',
               stacked: true,
@@ -79,10 +79,10 @@
           }
         },
         {
-          id: this.$utils.generateUniqueId(),
+          id: this.$uuid.v4(),
           series: [186, 93, 30, 20, 21, 4, 20],
           options: {
-            id: this.$utils.generateUniqueId(),
+            id: this.$uuid.v4(),
             chart: {
               type: 'pie',
             },
@@ -112,7 +112,7 @@
           }
         },
         {
-          id: this.$utils.generateUniqueId(),
+          id: this.$uuid.v4(),
           series: [
             {
               name: '총 진료비 (2019)',
@@ -136,7 +136,7 @@
             },
           ],
           options: {
-            id: this.$utils.generateUniqueId(),
+            id: this.$uuid.v4(),
             chart: {
               type: 'line',
             },
