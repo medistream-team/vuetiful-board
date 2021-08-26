@@ -197,6 +197,58 @@
             }
           }
         },
+        {
+          id: this.$uuid.v4(),
+          series: [
+            {
+              name: '2019년',
+              data: [104, 87, 110, 105, 137, 112, 114, 108, 85, 103, 87, 78]
+            },
+            {
+              name: '2020년',
+              data: [82, 60, 102, 114, 166, 142, 117, 104, 106, 136, 122, 105]
+            },
+            {
+              name: '2021년',
+              data: [128, 87, 58, 74, 73, 73, null, null, null, null, null, null]
+            }
+          ],
+          options: {
+            id: this.$uuid.v4(),
+            chart: {
+              type: 'bar',
+            },
+            title: {
+              text: '신규 환자 수',
+              align: 'center',
+              style: {
+                fontSize: '18px',
+                fontWeight: 'bold',
+              },
+            },
+            xaxis: {
+              categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+              labels: {
+                formatter: function(value) {
+                  return `${value}월`;
+                }
+              },
+            },
+            dataLabels: {
+              enabled: false
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return `${val}명`
+                }
+              }
+            },
+            legend: {
+              position: 'bottom',
+            }
+          }
+        },
       ]"
     />
   </div>
