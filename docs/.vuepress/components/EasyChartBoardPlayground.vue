@@ -245,8 +245,8 @@
               },
               tooltip: {
                 y: {
-                  formatter: function (val) {
-                    return `${val}명`
+                  formatter: function(value) {
+                    return `${value}명`
                   }
                 }
               },
@@ -307,8 +307,8 @@
               },
               tooltip: {
                 y: {
-                  formatter: function (val) {
-                    return `${val}%`
+                  formatter: function(value) {
+                    return `${value}%`
                   }
                 }
               },
@@ -386,12 +386,12 @@
               tooltip: {
                 y: [
                   {
-                    formatter: function (value) {
+                    formatter: function(value) {
                       return `${value}명`
                     }
                   },
                   {
-                    formatter: function (value) {
+                    formatter: function(value) {
                       return `${value}%`
                     }
                   },
