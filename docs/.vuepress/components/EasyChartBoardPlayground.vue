@@ -4,6 +4,7 @@
       :datasets="[
         {
           id: this.$uuid.v4(),
+          x:0, y:0, w:20, h:10, i:'0', static: false,
           chartInfo: {
             series: [
               {
@@ -82,6 +83,7 @@
         },
         {
           id: this.$uuid.v4(),
+          x: 0, y: 10, w: 20, h: 10, i: '1', static: false,
           chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
@@ -117,6 +119,7 @@
         },
         {
           id: this.$uuid.v4(),
+          x: 0, y: 20, w: 20, h: 10, i: '2',static: false,
           chartInfo: {
             series: [
               {
@@ -244,6 +247,7 @@
         },
         {
           id: this.$uuid.v4(),
+          x: 0, y: 30, w: 40, h: 10, i: '3', static: false,
           chartInfo: {
             series: [
               {
@@ -298,6 +302,7 @@
         },
         {
           id: this.$uuid.v4(),
+          x: 0, y: 40, w: 50, h: 10, i: '4', static: false,
           chartInfo: {
             series: [
               {
@@ -360,6 +365,7 @@
         },
         {
           id: this.$uuid.v4(),
+          x: 0, y: 50, w: 60, h: 10, i: '5',static: false,
           chartInfo: {
             series: [
               {
