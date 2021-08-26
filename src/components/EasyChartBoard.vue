@@ -3,9 +3,9 @@
     <apex-charts
       v-for="item in datasets"
       :key="item.id"
-      :type="item.options.type"
-      :series="item.series"
-      :options="item.options"
+      :type="item.chart.options.type"
+      :series="item.chart.series"
+      :options="item.chart.options"
     />
   </div>
 </template>
