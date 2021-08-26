@@ -249,6 +249,66 @@
             }
           }
         },
+        {
+          id: this.$uuid.v4(),
+          series: [
+            {
+              name: '2020년',
+              data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            },
+            {
+              name: '2021년',
+              data: [0, 0, 20, 17, 8, 10, 0, 0, 0, 0, 0, 0]
+            }
+          ],
+          options: {
+            id: this.$uuid.v4(),
+            chart: {
+              type: 'line',
+            },
+            title: {
+              text: '예약 취소율',
+              align: 'center',
+              style: {
+                fontSize: '18px',
+                fontWeight: 'bold',
+              },
+            },
+            xaxis: {
+              categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+              labels: {
+                formatter: function(value) {
+                  return `${value}월`;
+                }
+              },
+            },
+            yaxis: {
+              min: 0,
+              max: 100,
+              labels: {
+                formatter: function(value) {
+                  return `${value}%`;
+                },
+              }
+            },
+            dataLabels: {
+              enabled: true,
+              formatter: function(value) {
+                return `${value}%`;
+              }
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return `${val}%`
+                }
+              }
+            },
+            legend: {
+              position: 'bottom',
+            }
+          }
+        },
       ]"
     />
   </div>
