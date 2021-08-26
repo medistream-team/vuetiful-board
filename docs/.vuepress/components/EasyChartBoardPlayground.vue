@@ -172,11 +172,12 @@
                   title: {
                     text: '총 진료비'
                   },
-                  min: 30000000
+                  max: 80000000
                 },
                 {
                   seriesName: '총 진료비 (2020)',
-                  show: false
+                  show: false,
+                  max: 80000000
                 },
                 {
                   opposite: true,
@@ -189,13 +190,51 @@
                   },
                   title: {
                     text: '성장률'
+                  },
+                  min: -50,
+                  max: 200,
+                  labels: {
+                    formatter: function(value) {
+                      return `${value}%`;
+                    },
                   }
                 },
                 {
                   seriesName: '성장률 (2020)',
-                  show: false
+                  show: false,
+                  min: -50,
+                  max: 200,
+                  labels: {
+                    formatter: function(value) {
+                      return `${value}%`;
+                    },
+                  }
                 },
               ],
+              tooltip: {
+                y: [
+                  {
+                    formatter: function(value) {
+                      return `${value}원`
+                    }
+                  },
+                  {
+                    formatter: function(value) {
+                      return `${value}원`
+                    }
+                  },
+                  {
+                    formatter: function(value) {
+                      return `${value}%`
+                    }
+                  },
+                  {
+                    formatter: function(value) {
+                      return `${value}%`
+                    }
+                  },
+                ]
+              },
               legend: {
                 position: 'bottom',
               }
