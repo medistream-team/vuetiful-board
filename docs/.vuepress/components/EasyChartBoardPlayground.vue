@@ -319,6 +319,91 @@
           },
           gridInfo: {},
         },
+        {
+          id: this.$uuid.v4(),
+          chartInfo: {
+            series: [
+              {
+                name: '65세 이상 환자 수',
+                type: 'column',
+                data: [125, 207, 218, 191, 241, 258, 204, 217, 294, 252, 208, 126, 217, 259, 257, 213]
+              },
+              {
+                name: '성장률',
+                type: 'line',
+                data: [null, 66, 74, 53, 93, 106, 63, 74, 135, 102, 66, 1, 74, 107, 106, 70]
+              }
+            ],
+            options: {
+              chart: {
+                type: 'line',
+              },
+              title: {
+                text: '시작일 대비 65세 이상 환자 수',
+                align: 'center',
+                style: {
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                },
+              },
+              xaxis: {
+                categories: ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2101', '2102', '2103', '2104', '2105', '2106'],
+              },
+              yaxis: [
+                {
+                  title: {
+                    text: '환자 수'
+                  }
+                },
+                {
+                  opposite: true,
+                  title: {
+                    text: '성장률'
+                  },
+                  min: -50,
+                  max: 200,
+                  labels: {
+                    formatter: function(value) {
+                      return `${value}%`;
+                    },
+                  }
+                },
+              ],
+              annotations: {
+                yaxis: [{
+                  y: 125,
+                  borderColor: '#ff4560',
+                  label: {
+                    borderColor: '#ff4560',
+                    style: {
+                      color: '#fff',
+                      background: '#ff4560',
+                    },
+                    text: '시작일 환자 수',
+                  }
+                }],
+              },
+              tooltip: {
+                y: [
+                  {
+                    formatter: function (value) {
+                      return `${value}명`
+                    }
+                  },
+                  {
+                    formatter: function (value) {
+                      return `${value}%`
+                    }
+                  },
+                ]
+              },
+              legend: {
+                position: 'bottom',
+              }
+            },
+          },
+          gridInfo: {}
+        }
       ]"
     />
   </div>
