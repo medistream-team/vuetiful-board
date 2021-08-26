@@ -16,7 +16,22 @@ export default {
     datasets: {
       type: Array,
       require: true,
-      default: () => [],
+      default: function() {
+        return [
+          {
+            id: this.$uuid.v4(),
+            chartInfo: {
+              series: [],
+              options: {
+                chart: {
+                  type: '',
+                },
+              },
+            },
+            gridInfo: {},
+          },
+        ];
+      },
     },
   },
 };
