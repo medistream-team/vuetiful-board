@@ -24,7 +24,7 @@ export default {
               series: [],
               options: {
                 chart: {
-                  type: '',
+                  type: null,
                 },
               },
             },
