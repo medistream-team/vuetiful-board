@@ -4,7 +4,7 @@
       :datasets="[
         {
           id: this.$uuid.v4(),
-          chart: {
+          chartInfo: {
             series: [
               {
                 name: '간판',
@@ -78,11 +78,11 @@
               },
             }
           },
-          grid: {},
+          gridInfo: {},
         },
         {
           id: this.$uuid.v4(),
-          chart: {
+          chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
               chart: {
@@ -113,11 +113,11 @@
               }
             }
           },
-          grid: {},
+          gridInfo: {},
         },
         {
           id: this.$uuid.v4(),
-          chart: {
+          chartInfo: {
             series: [
               {
                 name: '총 진료비 (2019)',
@@ -201,11 +201,11 @@
               }
             }
           },
-          grid: {},
+          gridInfo: {},
         },
         {
           id: this.$uuid.v4(),
-          chart: {
+          chartInfo: {
             series: [
               {
                 name: '2019년',
@@ -255,11 +255,11 @@
               }
             }
           },
-          grid: {},
+          gridInfo: {},
         },
         {
           id: this.$uuid.v4(),
-          chart: {
+          chartInfo: {
             series: [
               {
                 name: '2020년',
@@ -317,7 +317,7 @@
               }
             }
           },
-          grid: {},
+          gridInfo: {},
         },
       ]"
     />
