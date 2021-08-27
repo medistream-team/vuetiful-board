@@ -1,10 +1,12 @@
 <template>
   <div>
     <easy-chart-board
+      :theme="'modern'"
+      :dark="true"
+      :layout-editable="layoutEditable"
       :datasets="[
         {
-          id: this.$uuid.v4(),
-          x:0, y:0, w:20, h:10, i:'0', static: false,
+          id: this.$uuid.v4(), 
           chartInfo: {
             series: [
               {
@@ -79,11 +81,12 @@
               },
             }
           },
-          gridInfo: {},
+          gridInfo: {
+            x:0, y:0, w:10, h:10, i:'0', static: false
+          },
         },
         {
           id: this.$uuid.v4(),
-          x: 0, y: 10, w: 20, h: 10, i: '1', static: false,
           chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
@@ -115,11 +118,13 @@
               }
             }
           },
-          gridInfo: {},
+          gridInfo: {
+            x: 0, y: 10, w: 20, h: 10, i: '1', static: false
+          },
         },
         {
           id: this.$uuid.v4(),
-          x: 0, y: 20, w: 20, h: 10, i: '2',static: false,
+
           chartInfo: {
             series: [
               {
@@ -243,11 +248,13 @@
               }
             }
           },
-          gridInfo: {},
+          gridInfo: {
+            x: 0, y: 20, w: 20, h: 10, i: '2',static: false
+          },
         },
         {
           id: this.$uuid.v4(),
-          x: 0, y: 30, w: 40, h: 10, i: '3', static: false,
+
           chartInfo: {
             series: [
               {
@@ -298,11 +305,13 @@
               }
             }
           },
-          gridInfo: {},
+          gridInfo: {
+            x: 0, y: 30, w: 40, h: 10, i: '3', static: false
+          },
         },
         {
           id: this.$uuid.v4(),
-          x: 0, y: 40, w: 50, h: 10, i: '4', static: false,
+
           chartInfo: {
             series: [
               {
@@ -361,11 +370,13 @@
               }
             }
           },
-          gridInfo: {},
+          gridInfo: {
+            x: 0, y: 40, w: 50, h: 10, i: '4', static: false
+          },
         },
         {
           id: this.$uuid.v4(),
-          x: 0, y: 50, w: 60, h: 10, i: '5',static: false,
+          
           chartInfo: {
             series: [
               {
@@ -447,7 +458,9 @@
               }
             },
           },
-          gridInfo: {}
+          gridInfo: {
+            x: 0, y: 50, w: 60, h: 10, i: '5',static: false
+          }
         }
       ]"
     />
@@ -459,4 +472,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>  
+</style>

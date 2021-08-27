@@ -1,14 +1,14 @@
 <template>
   <div>
     <grid-layout
-      :layout.sync="datasets"
-      :col-num="4"
+      :layout.sync="gridInfos"
+      :col-num="12"
       :row-height="50"
       :is-draggable="true"
       :is-resizable="true"
     >
       <grid-item
-        v-for="item in datasets"
+        v-for="(item, index) in gridInfos"
         :x="item.x"
         :y="item.y"
         :w="item.w"
@@ -18,9 +18,9 @@
         :key="item.i"
       >
         <apex-charts
-          :type="item.chartInfo.options.type"
-          :series="item.chartInfo.series"
-          :options="item.chartInfo.options"
+          :type="chartInfos[index].options.type"
+          :series="chartInfos[index].series"
+          :options="chartInfos[index].options"
         />
       </grid-item>
     </grid-layout>
@@ -32,22 +32,51 @@ export default {
   props: {
     datasets: {
       type: Array,
-      require: true,
-      default: () => [],
+      required: true,
+      default: function() {
+        return [
+          {
+            gridInfo: {
+              x: Number,
+              y: Number,
+              w: Number,
+              h: Number,
+              i: String,
+              static: Boolean,
+            },
+          },
+        ];
+      },
     },
+  },
+  data() {
+    return {
+      gridInfos: {
+        type: Array,
+      },
+      charInfos: {
+        type: Array,
+      },
+    };
+  },
+  mounted() {
+    this.gridInfos = this.datasets.map(item => item.gridInfo);
+    this.chartInfos = this.datasets.map(item => item.chartInfo);
   },
 };
 </script>
 
 <style lang="scss" scoped>
 vue-grid-layout {
-  background: lightblue;
+  background: white;
   width: 100%;
   height: 100%;
 }
+
 .vue-grid-item:not(.vue-grid-placeholder) {
-  background: lightblue;
-  border: 1px solid black;
+  background: white;
+  border: 0.8px solid gray;
+  border-radius: 5px;
   position: relative;
 }
 .vue-grid-item .resizing {
