@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
     "build:watch": "vue-cli-service build ./src/index.js --target lib --watch",
     "docs:dev": "vuepress dev docs",
