@@ -1,9 +1,6 @@
 <template>
   <div>
     <easy-chart-board
-      :theme="'modern'"
-      :dark="true"
-      :layout-editable="layoutEditable"
       :datasets="[
         {
           id: this.$uuid.v4(), 
