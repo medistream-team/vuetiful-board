@@ -1,7 +1,7 @@
 <template>
   <div>
     <apex-charts
-      v-for="item in datasets"
+      v-for="item in computedDatasets"
       :key="item.id"
       :type="item.chartInfo.options.type"
       :series="item.chartInfo.series"
@@ -32,6 +32,14 @@ export default {
           },
         ];
       },
+    },
+  },
+  computed: {
+    computedDatasets() {
+      return this.datasets.map(data => {
+        data.id = this.$uuid.v4();
+        return data;
+      });
     },
   },
 };
