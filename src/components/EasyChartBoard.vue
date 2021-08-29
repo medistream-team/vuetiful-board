@@ -32,6 +32,28 @@ export default {
           },
         ];
       },
+      validator: datasets => {
+        for (const data of datasets) {
+          const { chartInfo, gridInfo } = data;
+          const { series, options } = chartInfo;
+          const { chart } = options;
+
+          if (
+            !(chartInfo?.constructor.name === 'Object') ||
+            !(options?.constructor.name === 'Object') ||
+            !(chart?.constructor.name === 'Object') ||
+            !(gridInfo?.constructor.name === 'Object') ||
+            !(series?.constructor.name === 'Array') ||
+            !(!chart.type || chart.type.constructor.name === 'String')
+          ) {
+            console.error(
+              '[EasyChartBoard warn]: Invalid datasets prop: Please check the type or structure of datasets prop.',
+            );
+            return false;
+          }
+        }
+        return true;
+      },
     },
   },
   computed: {
