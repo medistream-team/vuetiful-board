@@ -76,9 +76,10 @@ export default {
     },
     addUniqueId() {
       return this.datasets.map(item => {
-        item.id = this.$uuid.v4();
-        item.chartInfo.id = this.$uuid.v4();
-        item.gridInfo.id = this.$uuid.v4();
+        item.id = item.id ?? this.$uuid.v4();
+        item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
+        item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
+
         return item;
       });
     },
