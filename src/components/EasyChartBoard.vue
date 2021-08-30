@@ -48,6 +48,12 @@ export default {
     };
   },
   methods: {
+    isType(element) {
+      return Object.prototype.toString
+        .call(element)
+        .slice(8, -1)
+        .toLowerCase();
+    },
     validateProps() {
       for (const data of this.datasets) {
         const { chartInfo, gridInfo } = data;
@@ -55,12 +61,12 @@ export default {
         const { chart } = options;
 
         if (
-          !(chartInfo?.constructor.name === 'Object') ||
-          !(options?.constructor.name === 'Object') ||
-          !(chart?.constructor.name === 'Object') ||
-          !(gridInfo?.constructor.name === 'Object') ||
-          !(series?.constructor.name === 'Array') ||
-          !(!chart.type || chart.type.constructor.name === 'String')
+          !(this.isType(chartInfo) === 'object') ||
+          !(this.isType(options) === 'object') ||
+          !(this.isType(chart) === 'object') ||
+          !(this.isType(gridInfo) === 'object') ||
+          !(this.isType(series) === 'array') ||
+          !(!chart.type || this.isType(chart.type) === 'string')
         ) {
           console.error(
             '[EasyChartBoard warn]: Invalid datasets prop: Please check the type or structure of datasets prop.',
