@@ -56,20 +56,36 @@ export default {
     },
     validateProps() {
       for (const data of this.datasets) {
-        const { chartInfo, gridInfo } = data;
-        const { series, options } = chartInfo;
-        const { chart } = options;
+        const { chartInfo, gridInfo } = data || {};
+        const { series, options } = chartInfo || {};
+        const { chart } = options || {};
+
+        if (!(this.isType(data) === 'object')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of element in datasets must be an object.',
+          );
+        }
 
         if (
           !(this.isType(chartInfo) === 'object') ||
           !(this.isType(options) === 'object') ||
           !(this.isType(chart) === 'object') ||
-          !(this.isType(gridInfo) === 'object') ||
-          !(this.isType(series) === 'array') ||
-          !(!chart.type || this.isType(chart.type) === 'string')
+          !(this.isType(gridInfo) === 'object')
         ) {
-          console.error(
-            '[EasyChartBoard warn]: Invalid datasets prop: Please check the type or structure of datasets prop.',
+          return console.error(
+            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of prop, such as chartInfo, chartInfo.options, chartInfo.options.chart, gridInfo, must be an object.',
+          );
+        }
+
+        if (!(this.isType(series) === 'array')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid chartInfo.series prop: Please check the type or structure of chartInfo.series prop. The type of chartInfo.series prop must be an array.',
+          );
+        }
+
+        if (!(!chart.type || this.isType(chart.type) === 'string')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid chartInfo.options.chart.type prop: Please check the type or structure of chartInfo.options.chart.type prop. The type of chartInfo.options.chart.type prop must be a string.',
           );
         }
       }
