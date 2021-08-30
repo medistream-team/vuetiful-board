@@ -1,6 +1,10 @@
 <template>
   <div>
+    <button class="editBtn" @click="layoutHandler">🖊</button>
     <easy-chart-board
+      :colNum="12"
+      :rowHeight="30"
+      :layout-editable="layoutEditable"
       :datasets="[
         {
           id: this.$uuid.v4(), 
@@ -39,7 +43,7 @@
               chart: {
                 type: 'bar',
                 stacked: true,
-                stackType: '100%',
+                stackType: '100%'
               },
               plotOptions: {
                 bar: {
@@ -79,7 +83,7 @@
             }
           },
           gridInfo: {
-            x:0, y:0, w:10, h:10, i:'0', static: false
+            x:0, y:0, w:6, h: 12, i:'0', static: false
           },
         },
         {
@@ -89,6 +93,7 @@
             options: {
               chart: {
                 type: 'pie',
+                width: '100%'
               },
               title: {
                 text: '최근 유입 경로 (2021년)',
@@ -116,12 +121,11 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 20, h: 10, i: '1', static: false
+            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
           },
         },
         {
           id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -246,12 +250,11 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 20, h: 10, i: '2',static: false
+            x: 0, y:10, w:6, h: 12, i: '2', static: false
           },
         },
         {
           id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -303,12 +306,11 @@
             }
           },
           gridInfo: {
-            x: 0, y: 30, w: 40, h: 10, i: '3', static: false
+            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
           },
         },
         {
           id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -368,12 +370,11 @@
             }
           },
           gridInfo: {
-            x: 0, y: 40, w: 50, h: 10, i: '4', static: false
+            x: 0, y: 20, w:6, h: 12, i: '4', static: false
           },
         },
         {
           id: this.$uuid.v4(),
-          
           chartInfo: {
             series: [
               {
@@ -456,7 +457,7 @@
             },
           },
           gridInfo: {
-            x: 0, y: 50, w: 60, h: 10, i: '5',static: false
+            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
           }
         }
       ]"
@@ -466,8 +467,25 @@
 
 <script>
 export default {
+  data() {
+    return {
+      layoutEditable: true,
+    }
+  },
+  methods: {
+    layoutHandler() {
+      this.layoutEditable = !this.layoutEditable
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>  
+.editBtn {
+  margin-left: 80px;
+  padding: 7px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: white;
+}
 </style>
