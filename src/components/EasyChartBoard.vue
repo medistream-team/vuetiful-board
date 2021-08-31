@@ -67,7 +67,7 @@ export default {
             },
             gridInfo: {
               id: this.$uuid.v4(),
-              x: Math.round(this.colNum / 4),
+              x: Math.round(this.colNum / 1),
               y: Math.round(this.colNum / 3),
               w: Math.round(this.colNum / 2),
               h: this.colNum,
@@ -153,13 +153,8 @@ export default {
 
 <style lang="scss" scoped>
 .vue-grid-item:not(.vue-grid-placeholder) {
-  border-radius: 5px;
+  border-radius: 13px;
   background: #ffffff;
-  box-shadow: 0 4px 6px -6px;
-}
-
-.vue-grid-layout {
-  border-radius: 5px;
-  background: #fffbfb;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
 }
 </style>
