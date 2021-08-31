@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="editBtn" @click="layoutHandler">🖊</button>
+    <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
     <easy-chart-board
       :colNum="12"
       :rowHeight="30"
@@ -83,7 +83,7 @@
             }
           },
           gridInfo: {
-            x:0, y:0, w:6, h: 12, i:'0', static: false
+            x:0, y:0, w:4, h:12, i:'0', static: false
           },
         },
         {
@@ -92,8 +92,7 @@
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
               chart: {
-                type: 'pie',
-                width: '100%'
+                type: 'pie'
               },
               title: {
                 text: '최근 유입 경로 (2021년)',
@@ -121,7 +120,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
+            x:4, y:0, w:4, h:12, i:'1', static:false
           },
         },
         {
@@ -152,6 +151,7 @@
             options: {
               chart: {
                 type: 'line',
+                redrawOnParentResize: true,
               },
               title: {
                 text: '총 진료비',
@@ -250,11 +250,12 @@
             }
           },
           gridInfo: {
-            x: 0, y:10, w:6, h: 12, i: '2', static: false
+            x:8, y:0, w:4, h:12, i:'2', static: false
           },
         },
         {
           id: this.$uuid.v4(),
+
           chartInfo: {
             series: [
               {
@@ -306,11 +307,12 @@
             }
           },
           gridInfo: {
-            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
+            x:0, y:5, w:4, h:12, i:'3', static: false
           },
         },
         {
           id: this.$uuid.v4(),
+
           chartInfo: {
             series: [
               {
@@ -370,7 +372,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w:6, h: 12, i: '4', static: false
+            x:4, y:5, w:4, h:12, i:'4', static: false
           },
         },
         {
@@ -457,7 +459,7 @@
             },
           },
           gridInfo: {
-            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
+            x:8, y:5, w:4, h:12, i:'4', static: false
           }
         }
       ]"
@@ -472,20 +474,15 @@ export default {
       layoutEditable: true,
     }
   },
-  methods: {
-    layoutHandler() {
-      this.layoutEditable = !this.layoutEditable
-    }
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>  
+<style>
 .editBtn {
-  margin-left: 80px;
   padding: 7px;
   border: 1px solid white;
   border-radius: 5px;
   background: white;
+  cursor: pointer;
 }
 </style>

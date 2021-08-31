@@ -1,38 +1,39 @@
 <template>
   <div>
-    <div class="container">
-      <grid-layout
-        :layout.sync="gridInfos"
-        :col-num="colNum"
-        :row-height="rowHeight"
-        :is-draggable="layoutEditable"
-        :is-resizable="layoutEditable"
+    <grid-layout
+      :layout.sync="gridInfos"
+      :col-num="colNum"
+      :row-height="rowHeight"
+      :is-draggable="layoutEditable"
+      :is-resizable="layoutEditable"
+    >
+      <grid-item
+        v-for="(item, index) in gridInfos"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+        :static="item.static"
+        :key="item.i"
       >
-        <grid-item
-          v-for="(item, index) in gridInfos"
-          :x="item.x"
-          :y="item.y"
-          :w="item.w"
-          :h="item.h"
-          :i="item.i"
-          :static="item.static"
-          :key="item.i"
-        >
-          <apex-charts
-            id="chart"
-            :type="chartInfos[index].options.type"
-            :series="chartInfos[index].series"
-            :options="chartInfos[index].options"
-          />
-        </grid-item>
-      </grid-layout>
-    </div>
+        <apex-charts
+          v-if="chartInfos[index]"
+          :type="chartInfos[index].options.type"
+          :series="chartInfos[index].series"
+          :options="chartInfos[index].options"
+        />
+      </grid-item>
+    </grid-layout>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: Array,
+    },
     colNum: {
       type: Number,
       required: true,
@@ -66,12 +67,12 @@ export default {
             },
             gridInfo: {
               id: this.$uuid.v4(),
-              x: Number,
-              y: Number,
-              w: Number,
-              h: Number,
+              x: Math.round(this.colNum / 4),
+              y: Math.round(this.colNum / 3),
+              w: Math.round(this.colNum / 2),
+              h: this.colNum,
               i: String,
-              static: Boolean,
+              static: false,
             },
           },
         ];
@@ -82,46 +83,83 @@ export default {
     return {
       gridInfos: {
         type: Array,
+        required: false,
       },
-      charInfos: {
+      chartInfos: {
         type: Array,
+        required: false,
       },
     };
   },
+  methods: {
+    isType(element) {
+      return Object.prototype.toString
+        .call(element)
+        .slice(8, -1)
+        .toLowerCase();
+    },
+    validateProps() {
+      for (const data of this.datasets) {
+        const { chartInfo, gridInfo } = data || {};
+        const { series, options } = chartInfo || {};
+        const { chart } = options || {};
+        if (!(this.isType(data) === 'object')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of element in datasets must be an object.',
+          );
+        }
+        if (
+          !(this.isType(chartInfo) === 'object') ||
+          !(this.isType(options) === 'object') ||
+          !(this.isType(chart) === 'object') ||
+          !(this.isType(gridInfo) === 'object')
+        ) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of prop, such as chartInfo, chartInfo.options, chartInfo.options.chart, gridInfo, must be an object.',
+          );
+        }
+        if (!(this.isType(series) === 'array')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid chartInfo.series prop: Please check the type or structure of chartInfo.series prop. The type of chartInfo.series prop must be an array.',
+          );
+        }
+        if (!(!chart.type || this.isType(chart.type) === 'string')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid chartInfo.options.chart.type prop: Please check the type or structure of chartInfo.options.chart.type prop. The type of chartInfo.options.chart.type prop must be a string.',
+          );
+        }
+      }
+    },
+    addUniqueId() {
+      return this.datasets.map(item => {
+        item.id = item.id ?? this.$uuid.v4();
+        item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
+        item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
+        return item;
+      });
+    },
+  },
+  created() {
+    this.validateProps();
+  },
   mounted() {
     this.gridInfos = this.datasets.map(item => item.gridInfo);
-    this.chartInfos = this.datasets.map(item => item.chartInfo);
+    setTimeout(() => {
+      this.chartInfos = this.datasets.map(item => item.chartInfo);
+    }, 1);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#chart {
-  margin: 0 auto;
-}
-
-.container {
-  width: 1280px;
-  margin: 0 auto;
+.vue-grid-item:not(.vue-grid-placeholder) {
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -6px;
 }
 
 .vue-grid-layout {
   border-radius: 5px;
   background: #fffbfb;
-}
-
-.vue-grid-item:not(.vue-grid-placeholder) {
-  width: 600px;
-  border-radius: 5px;
-  background: white;
-  box-shadow: 0 4px 6px -6px;
-}
-
-.vue-grid-item .resizing {
-  opacity: 0.9;
-}
-
-.vue-grid-item .static {
-  background: #cce;
 }
 </style>
