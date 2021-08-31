@@ -1,12 +1,12 @@
 module.exports = {
   // TODO: 추후 변경
-  base: '/easy-chart-board/',
-  title: '📊 Easy Chart Board',
+  base: '/vuetiful-board/',
+  title: '📊 Vuetiful Board',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Playground', link: '/playground/' },
-      { text: 'Github', link: 'https://github.com/medistream-team/202108'}
+      { text: 'Github', link: 'https://github.com/medistream-team/vuetiful-board'}
     ],
     sidebar: [
       ['/', 'Home'],

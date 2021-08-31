@@ -1,6 +1,6 @@
 <template>
   <div>
-    <easy-chart-board
+    <vuetiful-board
       :datasets="[
         {
           chartInfo: {
