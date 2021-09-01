@@ -11,8 +11,14 @@
 </template>
 
 <script>
+import palette from '../assets/palette.json';
+
 export default {
   props: {
+    theme: {
+      type: String,
+      default: 'classic',
+    },
     datasets: {
       type: Array,
       require: true,
@@ -27,6 +33,7 @@ export default {
                 chart: {
                   type: null,
                 },
+                colors: palette[0].colors,
               },
             },
             gridInfo: {
@@ -44,6 +51,10 @@ export default {
       },
       gridInfos: {
         type: Array,
+      },
+      palette: {
+        type: Array,
+        palette,
       },
     };
   },
@@ -99,12 +110,18 @@ export default {
         return item;
       });
     },
+    applyDefaultTheme(datasets) {
+      return datasets.forEach(
+        item => (item.chartInfo.options.colors = palette[0].colors),
+      );
+    },
   },
   created() {
     this.validateProps();
   },
   mounted() {
     const datasets = this.addUniqueId();
+    this.applyDefaultTheme(datasets);
 
     this.chartInfos = datasets.map(item => item.chartInfo);
     this.gridInfos = datasets.map(item => item.gridInfo);
