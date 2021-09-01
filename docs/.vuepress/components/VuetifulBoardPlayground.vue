@@ -2,8 +2,8 @@
   <div>
     <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
     <vuetiful-board
-      :colNum="12"
-      :rowHeight="30"
+      :col-num="colNum"
+      :row-height="rowHeight"
       :layout-editable="layoutEditable"
       :datasets="[
         {
@@ -463,6 +463,8 @@ export default {
   data() {
     return {
       layoutEditable: true,
+      colNum: 12,
+      rowHeight: 30
     }
   },
 };
