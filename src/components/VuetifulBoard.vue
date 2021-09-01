@@ -117,7 +117,7 @@ export default {
     },
     setTheme(datasets) {
       if (!palette.some(theme => theme.name === this.theme)) {
-        console.error(
+        return console.error(
           '[vuetiful-board warn] Invalid theme: Please check the theme name.',
         );
       }
@@ -134,8 +134,8 @@ export default {
   },
   mounted() {
     let datasets = this.addUniqueId();
-    this.setDefaultTheme(datasets);
-    this.setTheme(datasets);
+
+    !this.theme ? this.setDefaultTheme(datasets) : this.setTheme(datasets);
 
     this.chartInfos = datasets.map(item => item.chartInfo);
     this.gridInfos = datasets.map(item => item.gridInfo);
