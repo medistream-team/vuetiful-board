@@ -2,6 +2,8 @@
 import Uuid from "vue-uuid";
 import EasyChartBoard from '../../src/index.js';
 
+import '../../src/assets/scss/index.scss';
+
 export default ({ Vue }) => {
   Vue.use(Uuid);
   Vue.use(EasyChartBoard);
