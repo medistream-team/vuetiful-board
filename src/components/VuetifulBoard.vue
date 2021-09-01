@@ -17,7 +17,7 @@ export default {
   props: {
     theme: {
       type: String,
-      default: 'classic',
+      default: palette[0].name,
     },
     datasets: {
       type: Array,
