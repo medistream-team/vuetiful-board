@@ -110,7 +110,7 @@ export default {
         return item;
       });
     },
-    applyDefaultTheme(datasets) {
+    setDefaultTheme(datasets) {
       return datasets.forEach(
         item => (item.chartInfo.options.colors = palette[0].colors),
       );
@@ -134,7 +134,7 @@ export default {
   },
   mounted() {
     let datasets = this.addUniqueId();
-    this.applyDefaultTheme(datasets);
+    this.setDefaultTheme(datasets);
     this.setTheme(datasets);
 
     this.chartInfos = datasets.map(item => item.chartInfo);
