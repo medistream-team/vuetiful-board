@@ -1,10 +1,10 @@
 import VueApexCharts from 'vue-apexcharts';
-import EasyChartBoard from '../src/components/EasyChartBoard';
+import VuetifulBoard from '../src/components/VuetifulBoard';
 
 export default {
   install: function(Vue) {
     Vue.use(VueApexCharts);
     Vue.component('apex-charts', VueApexCharts);
-    Vue.component('easy-chart-board', EasyChartBoard);
+    Vue.component('vuetiful-board', VuetifulBoard);
   },
 };

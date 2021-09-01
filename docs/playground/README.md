@@ -1,3 +1,3 @@
 # Playground
 
-<easy-chart-board-playground />
+<vuetiful-board-playground />
