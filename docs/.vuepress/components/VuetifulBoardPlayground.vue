@@ -1,9 +1,8 @@
 <template>
   <div>
-    <easy-chart-board
+    <vuetiful-board
       :datasets="[
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [
               {
@@ -81,7 +80,6 @@
           gridInfo: {},
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
@@ -116,7 +114,6 @@
           gridInfo: {},
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [
               {
@@ -243,7 +240,6 @@
           gridInfo: {},
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [
               {
@@ -297,7 +293,6 @@
           gridInfo: {},
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [
               {
@@ -359,7 +354,6 @@
           gridInfo: {},
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [
               {
