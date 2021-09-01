@@ -1,6 +1,75 @@
 <template>
   <div>
+    <!-- TODO: Theme picker 서비스단으로 이동 -->
+    <ul class="theme-picker">
+      <li class="theme-picker-item" @click="switchTheme">
+        <label class="theme-picker-label" for="classic">
+          <input class="theme-picker-checkbox" type="checkbox" id="classic" />
+          <span class="theme-picker-name">Classic</span>
+          <span class="theme-picker-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-picker-item" @click="switchTheme">
+        <label class="theme-picker-label" for="rainbow">
+          <input class="theme-picker-checkbox" type="checkbox" id="rainbow" />
+          <span class="theme-picker-name">Rainbow</span>
+          <span class="theme-picker-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-picker-item" @click="switchTheme">
+        <label class="theme-picker-label" for="vintage">
+          <input class="theme-picker-checkbox" type="checkbox" id="vintage" />
+          <span class="theme-picker-name">Vintage</span>
+          <span class="theme-picker-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-picker-item" @click="switchTheme">
+        <label class="theme-picker-label" for="retro">
+          <input class="theme-picker-checkbox" type="checkbox" id="retro" />
+          <span class="theme-picker-name">Retro</span>
+          <span class="theme-picker-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-picker-item" @click="switchTheme">
+        <label class="theme-picker-label" for="green">
+          <input class="theme-picker-checkbox" type="checkbox" id="green" />
+          <span class="theme-picker-name">Green</span>
+          <span class="theme-picker-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+    </ul>
     <vuetiful-board
+      :theme="theme"
       :datasets="[
         {
           chartInfo: {
@@ -444,7 +513,92 @@
 
 <script>
 export default {
+  data() {
+    return {
+      // TODO: Theme picker에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      theme: 'retro',
+    }
+  },
+  methods: {
+    switchTheme() {
+      // TODO: Theme swatch를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      this.theme = 'hoge';
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.theme-picker {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0;
+}
+
+.theme-picker-item {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+
+  &:hover {
+    box-shadow: 0 2px 16px rgb(0 0 0 / 15%);
+    transform: scale(1.05);
+  }
+
+  .theme-picker-label {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+
+  .theme-picker-checkbox {
+    display: none;
+  }
+
+  .theme-picker-name {
+    display: block;
+    font-size: 14px;
+  }
+
+  .hue {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+    vertical-align: middle;
+
+    // TODO: 테마별 색상으로 바인딩하기
+    &.primary {
+      background: #5975fe;
+    }
+
+    &.secondary {
+      background: #54d2d2;
+    }
+
+    &.third {
+      background: #ffcb00;
+    }
+
+    &.fourth {
+      background: #ff6150;
+    }
+
+    &.fifth {
+      background: #1360bf;
+    }
+
+    & + .hue {
+      margin-left: -6px;
+    }
+  }
+}
+</style>
+
