@@ -1,12 +1,17 @@
 {
-  "name": "202108",
+  "name": "vuetiful-board-test",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build .src/index.js --target lib",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
+  "files": [
+    "dist/vuetiful-board.umd.min.js"
+  ],
+  "main": "dist/vuetiful-board.umd.min.js",
+  "license": "MIT",
+  "repository": "https://github.com/medistream-team/vuetiful-board",
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
