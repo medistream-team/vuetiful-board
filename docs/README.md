@@ -1,4 +1,4 @@
-# Easy-Chart-Board
+# Vuetiful-Board
 
 ## Description
 

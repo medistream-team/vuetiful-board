@@ -6,6 +6,7 @@
       :row-height="rowHeight"
       :is-draggable="layoutEditable"
       :is-resizable="layoutEditable"
+      @layout-ready="bindChartInfos"
     >
       <grid-item
         v-for="(item, index) in gridInfos"
@@ -31,9 +32,6 @@
 <script>
 export default {
   props: {
-    value: {
-      type: Array,
-    },
     colNum: {
       type: Number,
       required: true,
@@ -71,7 +69,7 @@ export default {
               y: Math.round(this.colNum / 3),
               w: Math.round(this.colNum / 2),
               h: this.colNum,
-              i: String,
+              i: '',
               static: false,
             },
           },
@@ -92,61 +90,36 @@ export default {
     };
   },
   methods: {
-    isType(element) {
-      return Object.prototype.toString
-        .call(element)
-        .slice(8, -1)
-        .toLowerCase();
-    },
-    validateProps() {
-      for (const data of this.datasets) {
-        const { chartInfo, gridInfo } = data || {};
-        const { series, options } = chartInfo || {};
-        const { chart } = options || {};
-        if (!(this.isType(data) === 'object')) {
-          return console.error(
-            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of element in datasets must be an object.',
-          );
+    validateGridInfos() {
+      this.gridInfos.map((gridInfo, index) => {
+        if (gridInfo.x === undefined) {
+          gridInfo.x = this.colNum;
         }
-        if (
-          !(this.isType(chartInfo) === 'object') ||
-          !(this.isType(options) === 'object') ||
-          !(this.isType(chart) === 'object') ||
-          !(this.isType(gridInfo) === 'object')
-        ) {
-          return console.error(
-            '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of prop, such as chartInfo, chartInfo.options, chartInfo.options.chart, gridInfo, must be an object.',
-          );
+        if (gridInfo.y === undefined) {
+          gridInfo.y = Math.round(index / 3) * 4;
         }
-        if (!(this.isType(series) === 'array')) {
-          return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.series prop: Please check the type or structure of chartInfo.series prop. The type of chartInfo.series prop must be an array.',
-          );
+        if (gridInfo.w === undefined) {
+          gridInfo.w = this.colNum / 2;
         }
-        if (!(!chart.type || this.isType(chart.type) === 'string')) {
-          return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.options.chart.type prop: Please check the type or structure of chartInfo.options.chart.type prop. The type of chartInfo.options.chart.type prop must be a string.',
-          );
+        if (gridInfo.h === undefined) {
+          gridInfo.h = this.colNum;
         }
-      }
-    },
-    addUniqueId() {
-      return this.datasets.map(item => {
-        item.id = item.id ?? this.$uuid.v4();
-        item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
-        item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
-        return item;
+        if (gridInfo.i === undefined) {
+          gridInfo.i === '';
+        }
+        if (gridInfo.static === undefined) {
+          gridInfo.static === false;
+        }
+        return gridInfo;
       });
     },
-  },
-  created() {
-    this.validateProps();
+    bindChartInfos() {
+      this.chartInfos = this.datasets.map(item => item.chartInfo);
+    },
   },
   mounted() {
     this.gridInfos = this.datasets.map(item => item.gridInfo);
-    setTimeout(() => {
-      this.chartInfos = this.datasets.map(item => item.chartInfo);
-    }, 1);
+    this.validateGridInfos();
   },
 };
 </script>

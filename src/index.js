@@ -1,5 +1,5 @@
 import VueApexCharts from 'vue-apexcharts';
-import EasyChartBoard from '../src/components/EasyChartBoard';
+import VuetifulBoard from '../src/components/VuetifulBoard';
 import { GridLayout, GridItem } from 'vue-grid-layout';
 
 export default {
@@ -8,8 +8,8 @@ export default {
     Vue.use(GridLayout);
     Vue.use(GridItem);
     Vue.component('apex-charts', VueApexCharts);
-    Vue.component('easy-chart-board', EasyChartBoard);
     Vue.component('grid-layout', GridLayout);
     Vue.component('grid-item', GridItem);
+    Vue.component('vuetiful-board', VuetifulBoard);
   },
 };
