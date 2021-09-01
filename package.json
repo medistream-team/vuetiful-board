@@ -2,7 +2,7 @@
   "name": "vuetiful-board-test",
   "version": "0.1.0",
   "scripts": {
-    "build": "vue-cli-service build .src/index.js --target lib",
+    "build": "vue-cli-service build ./src/index.js --target lib",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
