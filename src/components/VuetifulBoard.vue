@@ -133,7 +133,7 @@ export default {
 
         if (!(this.isType(series) === 'array')) {
           return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.series prop: Please check the type or structure of chartInfo.series prop. The type of chartInfo.series prop must be an array.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of chartInfo.series prop. The type of prop must be an array.',
           );
         }
 
@@ -142,7 +142,7 @@ export default {
           !(this.isType(gridInfo.i) === 'string')
         ) {
           return console.error(
-            '[vuetiful-board warn]: Invalid prop: Please check the type or structure of chartInfo.options.chart.type and gridInfo.i prop. The type of prop must be a string.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of chartInfo.options.chart.type and gridInfo.i prop. The type of prop must be a string.',
           );
         }
 
@@ -153,13 +153,13 @@ export default {
           !(this.isType(gridInfo.h) === 'number')
         ) {
           return console.error(
-            '[vuetiful-board warn]: Invalid gridInfo prop: Please check the type or structure of gridInfo.x, gridInfo.y, gridInfo.w, gridInfo.h prop. The type of prop must be a number.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of gridInfo.x, gridInfo.y, gridInfo.w, gridInfo.h prop. The type of prop must be a number.',
           );
         }
 
         if (!(this.isType(gridInfo.static) === 'boolean')) {
           return console.error(
-            '[vuetiful-board warn]: Invalid prop: Please check the type or structure of gridInfo.static prop. The type of prop must be a boolean.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of gridInfo.static prop. The type of prop must be a boolean.',
           );
         }
       }
