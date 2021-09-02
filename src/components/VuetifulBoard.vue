@@ -188,9 +188,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vue-grid-item:not(.vue-grid-placeholder) {
-  background: #fff;
-  border-radius: 13px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+.vue-grid-item {
+  touch-action: none;
+
+  &:not(.vue-grid-placeholder) {
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+  }
 }
 </style>
