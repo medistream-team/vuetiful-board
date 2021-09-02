@@ -1,12 +1,19 @@
 {
-  "name": "202108",
+  "name": "vuetiful-board",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
-    "build": "vue-cli-service build",
+    "dev": "cd dev && vue-cli-service serve",
+    "build": "vue-cli-service build ./src/index.js --target lib",
+    "build:watch": "vue-cli-service build ./src/index.js --target lib --watch",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
+  "files": [
+    "dist/vuetiful-board.umd.min.js"
+  ],
+  "main": "dist/vuetiful-board.umd.min.js",
+  "license": "MIT",
+  "repository": "https://github.com/medistream-team/vuetiful-board",
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
@@ -16,6 +23,7 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "apexcharts": "^3.27.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.4.0",
@@ -24,8 +32,12 @@
     "prettier": "^1.19.1",
     "sass": "^1.38.0",
     "sass-loader": "^10.2.0",
+    "uuid": "^3.4.0",
+    "vue-apexcharts": "^1.6.2",
+    "vue-grid-layout": "^2.3.12",
     "vue-router": "^3.5.2",
     "vue-template-compiler": "^2.6.11",
+    "vue-uuid": "^2.0.2",
     "vuepress": "^1.8.2"
   },
   "browserslist": [
