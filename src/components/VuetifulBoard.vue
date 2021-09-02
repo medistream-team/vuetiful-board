@@ -107,9 +107,6 @@ export default {
         .slice(8, -1)
         .toLowerCase();
     },
-    bindChartInfos() {
-      this.chartInfos = this.datasets.map(item => item.chartInfo);
-    },
     validateProps() {
       for (const data of this.datasets) {
         const { chartInfo, gridInfo } = data || {};
@@ -146,6 +143,12 @@ export default {
         }
       }
     },
+    bindGridInfos() {
+      this.gridInfos = this.datasets.map(item => item.gridInfo);
+    },
+    bindChartInfos() {
+      this.chartInfos = this.datasets.map(item => item.chartInfo);
+    },
     addUniqueId() {
       this.datasets.forEach(item => {
         item.id = item.id ?? this.$uuid.v4();
@@ -176,7 +179,7 @@ export default {
   },
   created() {
     this.validateProps();
-    this.gridInfos = this.datasets.map(item => item.gridInfo);
+    this.bindGridInfos();
   },
   mounted() {
     this.addUniqueId();
