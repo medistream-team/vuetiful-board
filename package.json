@@ -2,6 +2,7 @@
   "name": "vuetiful-board",
   "version": "0.1.0",
   "scripts": {
+    "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
     "build:watch": "vue-cli-service build ./src/index.js --target lib --watch",
     "docs:dev": "vuepress dev docs",
@@ -33,6 +34,7 @@
     "sass-loader": "^10.2.0",
     "uuid": "^3.4.0",
     "vue-apexcharts": "^1.6.2",
+    "vue-grid-layout": "^2.3.12",
     "vue-router": "^3.5.2",
     "vue-template-compiler": "^2.6.11",
     "vue-uuid": "^2.0.2",

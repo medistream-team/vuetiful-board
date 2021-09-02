@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
-    <vuetiful-board
-      :col-num="colNum"
-      :row-height="rowHeight"
-      :layout-editable="layoutEditable"
+  <div id="app">
+    <easy-chart-board
       :datasets="[
         {
+          id: this.$uuid.v4(), 
           chartInfo: {
             series: [
               {
@@ -82,10 +79,11 @@
             }
           },
           gridInfo: {
-            x:0, y:0, w:6, h:12, i:'0', static: false
+            x:0, y:0, w:10, h:10, i:'0', static: false
           },
         },
         {
+          id: this.$uuid.v4(),
           chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
@@ -118,10 +116,12 @@
             }
           },
           gridInfo: {
-            x:6, y:0, w:6, h:12, i:'1', static:false
+            x: 0, y: 10, w: 20, h: 10, i: '1', static: false
           },
         },
         {
+          id: this.$uuid.v4(),
+
           chartInfo: {
             series: [
               {
@@ -246,10 +246,12 @@
             }
           },
           gridInfo: {
-             x:0, y:10, w:6, h:12, i:'2', static: false
+            x: 0, y: 20, w: 20, h: 10, i: '2',static: false
           },
         },
         {
+          id: this.$uuid.v4(),
+
           chartInfo: {
             series: [
               {
@@ -301,10 +303,12 @@
             }
           },
           gridInfo: {
-            x:6, y:10, w:6, h:12, i:'3', static: false
+            x: 0, y: 30, w: 40, h: 10, i: '3', static: false
           },
         },
         {
+          id: this.$uuid.v4(),
+
           chartInfo: {
             series: [
               {
@@ -364,10 +368,12 @@
             }
           },
           gridInfo: {
-            x:0, y:20, w:6, h:12, i:'4', static: false
+            x: 0, y: 40, w: 50, h: 10, i: '4', static: false
           },
         },
         {
+          id: this.$uuid.v4(),
+          
           chartInfo: {
             series: [
               {
@@ -450,7 +456,7 @@
             },
           },
           gridInfo: {
-            x:6, y:20, w:6, h:12, i:'5', static: false
+            x: 0, y: 50, w: 60, h: 10, i: '5',static: false
           }
         }
       ]"
@@ -460,22 +466,17 @@
 
 <script>
 export default {
-  data() {
-    return {
-      layoutEditable: true,
-      colNum: 12,
-      rowHeight: 30
-    }
-  },
+  name: 'App',
 };
 </script>
 
 <style>
-.editBtn {
-  padding: 7px;
-  border: 1px solid white;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
