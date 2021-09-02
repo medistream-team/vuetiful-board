@@ -7,9 +7,9 @@
     "docs:build": "vuepress build docs"
   },
   "files": [
-    "dist/vuetiful-board.umd.min.js"
+    "dist/vuetiful-board-test.umd.min.js"
   ],
-  "main": "dist/vuetiful-board.umd.min.js",
+  "main": "dist/vuetiful-board-test.umd.min.js",
   "license": "MIT",
   "repository": "https://github.com/medistream-team/vuetiful-board",
   "dependencies": {
