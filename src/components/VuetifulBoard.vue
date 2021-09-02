@@ -16,7 +16,7 @@
         :h="item.h"
         :i="item.i"
         :static="item.static"
-        :key="item.i"
+        :key="item.id"
       >
         <apex-charts
           v-if="chartInfos[index]"
@@ -30,8 +30,14 @@
 </template>
 
 <script>
+import palette from '../assets/palette.json';
+
 export default {
   props: {
+    theme: {
+      type: String,
+      default: palette[0].name,
+    },
     colNum: {
       type: Number,
       required: true,
@@ -49,7 +55,7 @@ export default {
     },
     datasets: {
       type: Array,
-      require: true,
+      required: true,
       default: function() {
         return [
           {
@@ -61,6 +67,7 @@ export default {
                 chart: {
                   type: null,
                 },
+                colors: palette[0].colors,
               },
             },
             gridInfo: {
@@ -79,11 +86,17 @@ export default {
   },
   data() {
     return {
-      chartInfos: {
-        type: Array,
-      },
       gridInfos: {
         type: Array,
+        required: false,
+      },
+      chartInfos: {
+        type: Array,
+        required: false,
+      },
+      palette: {
+        type: Array,
+        palette,
       },
     };
   },
@@ -100,6 +113,7 @@ export default {
         const { series, options } = chartInfo || {};
         const { chart } = options || {};
 
+        // TODO: 에러 메시지의 에러 항목 안내를 자동화 (i.e. The type of A prop must be B.)
         if (!(this.isType(data) === 'object')) {
           return console.error(
             '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of element in datasets must be an object.',
@@ -119,22 +133,45 @@ export default {
 
         if (!(this.isType(series) === 'array')) {
           return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.series prop: Please check the type or structure of chartInfo.series prop. The type of chartInfo.series prop must be an array.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of chartInfo.series prop. The type of prop must be an array.',
           );
         }
 
-        if (!(!chart.type || this.isType(chart.type) === 'string')) {
+        if (
+          !(!chart.type || this.isType(chart.type) === 'string') ||
+          !(this.isType(gridInfo.i) === 'string')
+        ) {
           return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.options.chart.type prop: Please check the type or structure of chartInfo.options.chart.type prop. The type of chartInfo.options.chart.type prop must be a string.',
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of chartInfo.options.chart.type and gridInfo.i prop. The type of prop must be a string.',
+          );
+        }
+
+        if (
+          !(this.isType(gridInfo.x) === 'number') ||
+          !(this.isType(gridInfo.y) === 'number') ||
+          !(this.isType(gridInfo.w) === 'number') ||
+          !(this.isType(gridInfo.h) === 'number')
+        ) {
+          return console.error(
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of gridInfo.x, gridInfo.y, gridInfo.w, gridInfo.h prop. The type of prop must be a number.',
+          );
+        }
+
+        if (!(this.isType(gridInfo.static) === 'boolean')) {
+          return console.error(
+            '[vuetiful-board warn] Invalid prop: Please check the type or structure of gridInfo.static prop. The type of prop must be a boolean.',
           );
         }
       }
+    },
+    bindGridInfos() {
+      this.gridInfos = this.datasets.map(item => item.gridInfo);
     },
     bindChartInfos() {
       this.chartInfos = this.datasets.map(item => item.chartInfo);
     },
     addUniqueId() {
-      return this.datasets.map(item => {
+      this.datasets.forEach(item => {
         item.id = item.id ?? this.$uuid.v4();
         item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
         item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
@@ -142,22 +179,45 @@ export default {
         return item;
       });
     },
+    setDefaultTheme() {
+      return this.datasets.forEach(
+        item => (item.chartInfo.options.colors = palette[0].colors),
+      );
+    },
+    setTheme() {
+      if (!palette.some(theme => theme.name === this.theme)) {
+        return console.error(
+          '[vuetiful-board warn] Invalid theme: Please check the theme name.',
+        );
+      }
+
+      const selectedTheme = palette.filter(theme => this.theme === theme.name);
+
+      return this.datasets.forEach(
+        item => (item.chartInfo.options.colors = selectedTheme[0].colors),
+      );
+    },
   },
   created() {
     this.validateProps();
+    this.bindGridInfos();
   },
   mounted() {
-    const datasets = this.addUniqueId();
+    this.addUniqueId();
 
-    this.gridInfos = datasets.map(item => item.gridInfo);
+    !this.theme ? this.setDefaultTheme() : this.setTheme();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.vue-grid-item:not(.vue-grid-placeholder) {
-  border-radius: 13px;
-  background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+.vue-grid-item {
+  touch-action: none;
+
+  &:not(.vue-grid-placeholder) {
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+  }
 }
 </style>

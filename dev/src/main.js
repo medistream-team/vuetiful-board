@@ -1,11 +1,13 @@
 import Vue from 'vue'
+import UUID from 'vue-uuid'
 import App from './App.vue'
-import EasyChartBoard from '../../src/index.js'
-import VueUuid from 'vue-uuid'
+import VuetifulBoard from '../../src/index.js'
 
 Vue.config.productionTip = false
-Vue.use(EasyChartBoard)
-Vue.use(VueUuid)
+Vue.use(VuetifulBoard)
+Vue.use(UUID)
+
+import '../../src/assets/scss/index.scss';
 
 new Vue({
   render: h => h(App),
