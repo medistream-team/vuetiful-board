@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- TODO: Theme picker 서비스단으로 이동 -->
-    <ul class="theme-picker">
-      <li class="theme-picker-item" @click="switchTheme">
-        <label class="theme-picker-label" for="classic">
-          <input class="theme-picker-checkbox" type="checkbox" id="classic" />
-          <span class="theme-picker-name">Classic</span>
-          <span class="theme-picker-palette">
+    <ul class="theme-swatches">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="classic">
+          <input class="theme-swatches-checkbox" type="checkbox" id="classic" />
+          <span class="theme-swatches-name">Classic</span>
+          <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
             <span class="hue third"></span>
@@ -15,11 +15,11 @@
           </span>
         </label>
       </li>
-      <li class="theme-picker-item" @click="switchTheme">
-        <label class="theme-picker-label" for="rainbow">
-          <input class="theme-picker-checkbox" type="checkbox" id="rainbow" />
-          <span class="theme-picker-name">Rainbow</span>
-          <span class="theme-picker-palette">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="rainbow">
+          <input class="theme-swatches-checkbox" type="checkbox" id="rainbow" />
+          <span class="theme-swatches-name">Rainbow</span>
+          <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
             <span class="hue third"></span>
@@ -28,11 +28,11 @@
           </span>
         </label>
       </li>
-      <li class="theme-picker-item" @click="switchTheme">
-        <label class="theme-picker-label" for="vintage">
-          <input class="theme-picker-checkbox" type="checkbox" id="vintage" />
-          <span class="theme-picker-name">Vintage</span>
-          <span class="theme-picker-palette">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="vintage">
+          <input class="theme-swatches-checkbox" type="checkbox" id="vintage" />
+          <span class="theme-swatches-name">Vintage</span>
+          <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
             <span class="hue third"></span>
@@ -41,11 +41,11 @@
           </span>
         </label>
       </li>
-      <li class="theme-picker-item" @click="switchTheme">
-        <label class="theme-picker-label" for="retro">
-          <input class="theme-picker-checkbox" type="checkbox" id="retro" />
-          <span class="theme-picker-name">Retro</span>
-          <span class="theme-picker-palette">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="retro">
+          <input class="theme-swatches-checkbox" type="checkbox" id="retro" />
+          <span class="theme-swatches-name">Retro</span>
+          <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
             <span class="hue third"></span>
@@ -54,11 +54,11 @@
           </span>
         </label>
       </li>
-      <li class="theme-picker-item" @click="switchTheme">
-        <label class="theme-picker-label" for="green">
-          <input class="theme-picker-checkbox" type="checkbox" id="green" />
-          <span class="theme-picker-name">Green</span>
-          <span class="theme-picker-palette">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="green">
+          <input class="theme-swatches-checkbox" type="checkbox" id="green" />
+          <span class="theme-swatches-name">Green</span>
+          <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
             <span class="hue third"></span>
@@ -108,6 +108,17 @@
                 type: 'bar',
                 stacked: true,
                 stackType: '100%',
+              },
+              grid: {
+                padding: {
+                  top: 20,
+                  right: 20,
+                  bottom: 20,
+                  left: 20
+                },
+              },
+              theme: {
+                mode: 'dark',
               },
               plotOptions: {
                 bar: {
@@ -515,13 +526,13 @@
 export default {
   data() {
     return {
-      // TODO: Theme picker에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
-      theme: 'retro',
+      // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      theme: 'rainbow',
     }
   },
   methods: {
     switchTheme() {
-      // TODO: Theme swatch를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      // TODO: Theme swatches를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
       this.theme = 'hoge';
     },
   },
@@ -529,14 +540,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.theme-picker {
+.theme-swatches {
   display: flex;
   justify-content: space-between;
   align-content: center;
   padding: 0;
 }
 
-.theme-picker-item {
+.theme-swatches-item {
   background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
@@ -548,7 +559,7 @@ export default {
     transform: scale(1.05);
   }
 
-  .theme-picker-label {
+  .theme-swatches-label {
     position: relative;
     display: block;
     width: 100%;
@@ -557,11 +568,11 @@ export default {
     cursor: pointer;
   }
 
-  .theme-picker-checkbox {
+  .theme-swatches-checkbox {
     display: none;
   }
 
-  .theme-picker-name {
+  .theme-swatches-name {
     display: block;
     font-size: 14px;
   }
