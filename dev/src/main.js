@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueUuid from 'vue-uuid'
+import UUID from 'vue-uuid'
 import App from './App.vue'
 import VuetifulBoard from '../../src/index.js'
 
 Vue.config.productionTip = false
 Vue.use(VuetifulBoard)
-Vue.use(VueUuid)
+Vue.use(UUID)
 
 import '../../src/assets/scss/index.scss';
 
