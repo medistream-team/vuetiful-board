@@ -1,9 +1,82 @@
 <template>
   <div id="app">
+    <!-- TODO: Theme swatches 서비스단으로 이동 -->
+    <ul class="theme-swatches">
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="classic">
+          <input class="theme-swatches-checkbox" type="checkbox" id="classic" />
+          <span class="theme-swatches-name">Classic</span>
+          <span class="theme-swatches-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="rainbow">
+          <input class="theme-swatches-checkbox" type="checkbox" id="rainbow" />
+          <span class="theme-swatches-name">Rainbow</span>
+          <span class="theme-swatches-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="vintage">
+          <input class="theme-swatches-checkbox" type="checkbox" id="vintage" />
+          <span class="theme-swatches-name">Vintage</span>
+          <span class="theme-swatches-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="retro">
+          <input class="theme-swatches-checkbox" type="checkbox" id="retro" />
+          <span class="theme-swatches-name">Retro</span>
+          <span class="theme-swatches-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+      <li class="theme-swatches-item" @click="switchTheme">
+        <label class="theme-swatches-label" for="green">
+          <input class="theme-swatches-checkbox" type="checkbox" id="green" />
+          <span class="theme-swatches-name">Green</span>
+          <span class="theme-swatches-palette">
+            <span class="hue primary"></span>
+            <span class="hue secondary"></span>
+            <span class="hue third"></span>
+            <span class="hue fourth"></span>
+            <span class="hue fifth"></span>
+          </span>
+        </label>
+      </li>
+    </ul>
+
+    <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
     <vuetiful-board
+      :theme="theme"
+      :col-num="colNum"
+      :row-height="rowHeight"
+      :layout-editable="layoutEditable"
       :datasets="[
         {
-          id: this.$uuid.v4(), 
           chartInfo: {
             series: [
               {
@@ -79,11 +152,10 @@
             }
           },
           gridInfo: {
-            x:0, y:0, w:10, h:10, i:'0', static: false
+            x: 0, y: 0, w: 6, h: 12, i: '0', static: false
           },
         },
         {
-          id: this.$uuid.v4(),
           chartInfo: {
             series: [186, 93, 30, 20, 21, 4, 20],
             options: {
@@ -116,12 +188,10 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 20, h: 10, i: '1', static: false
+            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
           },
         },
         {
-          id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -246,12 +316,10 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 20, h: 10, i: '2',static: false
+            x: 0, y: 10, w: 6, h: 10, i: '2', static: false
           },
         },
         {
-          id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -303,12 +371,10 @@
             }
           },
           gridInfo: {
-            x: 0, y: 30, w: 40, h: 10, i: '3', static: false
+            x: 6, y: 10, w: 6, h: 10, i: '3', static: false
           },
         },
         {
-          id: this.$uuid.v4(),
-
           chartInfo: {
             series: [
               {
@@ -368,12 +434,10 @@
             }
           },
           gridInfo: {
-            x: 0, y: 40, w: 50, h: 10, i: '4', static: false
+            x: 0, y: 20, w: 6, h: 10, i: '4', static: false
           },
         },
         {
-          id: this.$uuid.v4(),
-          
           chartInfo: {
             series: [
               {
@@ -456,7 +520,7 @@
             },
           },
           gridInfo: {
-            x: 0, y: 50, w: 60, h: 10, i: '5',static: false
+            x: 6, y: 20, w: 6, h: 10, i: '5', static: false
           }
         }
       ]"
@@ -466,19 +530,106 @@
 
 <script>
 import VuetifulBoard from '../../src/components/VuetifulBoard.vue';
+
 export default {
   components: { VuetifulBoard },
   name: 'App',
+  data() {
+    return {
+      // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      theme: 'rainbow',
+      layoutEditable: true,
+      colNum: 12,
+      rowHeight: 30
+    }
+  },
+  methods: {
+    switchTheme() {
+      // TODO: Theme swatches를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
+      this.theme = 'hoge';
+    },
+  },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style lang="scss" scoped>
+.theme-swatches {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0;
+}
+
+.theme-swatches-item {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+
+  &:hover {
+    box-shadow: 0 2px 16px rgb(0 0 0 / 15%);
+    transform: scale(1.05);
+  }
+
+  .theme-swatches-label {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+
+  .theme-swatches-checkbox {
+    display: none;
+  }
+
+  .theme-swatches-name {
+    display: block;
+    font-size: 14px;
+  }
+
+  .hue {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+    vertical-align: middle;
+
+    // TODO: 테마별 색상으로 바인딩하기
+    &.primary {
+      background: #5975fe;
+    }
+
+    &.secondary {
+      background: #54d2d2;
+    }
+
+    &.third {
+      background: #ffcb00;
+    }
+
+    &.fourth {
+      background: #ff6150;
+    }
+
+    &.fifth {
+      background: #1360bf;
+    }
+
+    & + .hue {
+      margin-left: -6px;
+    }
+  }
+}
+
+.editBtn {
+  padding: 7px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
 }
 </style>
