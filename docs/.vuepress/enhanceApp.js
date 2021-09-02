@@ -1,6 +1,8 @@
-// 최종적으로는 ../../dist/easyChartBoard.min.js 가 되어야 합니다ㅎ
-import EasyChartBoard from '../../src/index.js'
+// 최종적으로는 ../../dist/vuetifulBoard.min.js 가 되어야 합니다ㅎ
+import Uuid from "vue-uuid";
+import VuetifulBoard from '../../src/index.js';
 
 export default ({ Vue }) => {
-  Vue.use(EasyChartBoard)
+  Vue.use(Uuid);
+  Vue.use(VuetifulBoard);
 };
