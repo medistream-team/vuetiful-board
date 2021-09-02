@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
     <ul class="theme-swatches">
       <li class="theme-swatches-item" @click="switchTheme">
@@ -529,7 +529,11 @@
 </template>
 
 <script>
+import VuetifulBoard from '../../src/components/VuetifulBoard.vue';
+
 export default {
+  components: { VuetifulBoard },
+  name: 'App',
   data() {
     return {
       // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
@@ -545,7 +549,7 @@ export default {
       this.theme = 'hoge';
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
