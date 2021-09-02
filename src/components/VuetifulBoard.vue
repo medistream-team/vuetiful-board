@@ -113,6 +113,7 @@ export default {
         const { series, options } = chartInfo || {};
         const { chart } = options || {};
 
+        // TODO: 에러 메시지의 에러 항목 안내를 자동화 (i.e. The type of A prop must be B.)
         if (!(this.isType(data) === 'object')) {
           return console.error(
             '[vuetiful-board warn]: Invalid datasets prop: Please check the type or structure of datasets prop. The type of element in datasets must be an object.',
@@ -136,9 +137,29 @@ export default {
           );
         }
 
-        if (!(!chart.type || this.isType(chart.type) === 'string')) {
+        if (
+          !(!chart.type || this.isType(chart.type) === 'string') ||
+          !(this.isType(gridInfo.i) === 'string')
+        ) {
           return console.error(
-            '[vuetiful-board warn]: Invalid chartInfo.options.chart.type prop: Please check the type or structure of chartInfo.options.chart.type prop. The type of chartInfo.options.chart.type prop must be a string.',
+            '[vuetiful-board warn]: Invalid prop: Please check the type or structure of chartInfo.options.chart.type and gridInfo.i prop. The type of prop must be a string.',
+          );
+        }
+
+        if (
+          !(this.isType(gridInfo.x) === 'number') ||
+          !(this.isType(gridInfo.y) === 'number') ||
+          !(this.isType(gridInfo.w) === 'number') ||
+          !(this.isType(gridInfo.h) === 'number')
+        ) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid gridInfo prop: Please check the type or structure of gridInfo.x, gridInfo.y, gridInfo.w, gridInfo.h prop. The type of prop must be a number.',
+          );
+        }
+
+        if (!(this.isType(gridInfo.static) === 'boolean')) {
+          return console.error(
+            '[vuetiful-board warn]: Invalid prop: Please check the type or structure of gridInfo.static prop. The type of prop must be a boolean.',
           );
         }
       }
