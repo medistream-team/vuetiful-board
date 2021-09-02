@@ -1,24 +1,17 @@
-# 202108
-
-## Project setup
-```
-npm install
+## Install
+```sh
+npm install vuetiful-board
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+## Usage
+
+```javascript
+import VuetifulBoard from 'vuetiful-board'
+
+Vue.use(VuetifulBoard)
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 📝 License
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Copyright © 2021 [Medistream](https://github.com/medistream-team)<br />
+This project is [MIT](https://github.com/medistream-team/vue-fullpage-modal/blob/master/LICENSE) licensed.
