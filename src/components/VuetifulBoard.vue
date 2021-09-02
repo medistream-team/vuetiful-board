@@ -16,7 +16,7 @@
         :h="item.h"
         :i="item.i"
         :static="item.static"
-        :key="item.i"
+        :key="item.id"
       >
         <apex-charts
           v-if="chartInfos[index]"
