@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <easy-chart-board
+    <vuetiful-board
       :datasets="[
         {
           id: this.$uuid.v4(), 
@@ -465,7 +465,9 @@
 </template>
 
 <script>
+import VuetifulBoard from '../../src/components/VuetifulBoard.vue';
 export default {
+  components: { VuetifulBoard },
   name: 'App',
 };
 </script>
