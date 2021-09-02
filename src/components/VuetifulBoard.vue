@@ -147,7 +147,7 @@ export default {
       }
     },
     addUniqueId() {
-      return this.datasets.map(item => {
+      this.datasets.forEach(item => {
         item.id = item.id ?? this.$uuid.v4();
         item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
         item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
@@ -176,13 +176,14 @@ export default {
   },
   created() {
     this.validateProps();
+    this.gridInfos = this.datasets.map(item => item.gridInfo);
   },
   mounted() {
-    let datasets = this.addUniqueId();
+    this.addUniqueId();
 
-    !this.theme ? this.setDefaultTheme(datasets) : this.setTheme(datasets);
-
-    this.gridInfos = datasets.map(item => item.gridInfo);
+    !this.theme
+      ? this.setDefaultTheme(this.datasets)
+      : this.setTheme(this.datasets);
   },
 };
 </script>
