@@ -5,6 +5,7 @@
     "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
     "build:watch": "vue-cli-service build ./src/index.js --target lib --watch",
+    "build:analyze": "vue-cli-service build ./src/index.js --target lib --report",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
