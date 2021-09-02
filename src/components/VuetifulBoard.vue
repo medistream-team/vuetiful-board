@@ -179,12 +179,12 @@ export default {
         return item;
       });
     },
-    setDefaultTheme(datasets) {
-      return datasets.forEach(
+    setDefaultTheme() {
+      return this.datasets.forEach(
         item => (item.chartInfo.options.colors = palette[0].colors),
       );
     },
-    setTheme(datasets) {
+    setTheme() {
       if (!palette.some(theme => theme.name === this.theme)) {
         return console.error(
           '[vuetiful-board warn] Invalid theme: Please check the theme name.',
@@ -193,7 +193,7 @@ export default {
 
       const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
-      return datasets.forEach(
+      return this.datasets.forEach(
         item => (item.chartInfo.options.colors = selectedTheme[0].colors),
       );
     },
@@ -205,9 +205,7 @@ export default {
   mounted() {
     this.addUniqueId();
 
-    !this.theme
-      ? this.setDefaultTheme(this.datasets)
-      : this.setTheme(this.datasets);
+    !this.theme ? this.setDefaultTheme() : this.setTheme();
   },
 };
 </script>
