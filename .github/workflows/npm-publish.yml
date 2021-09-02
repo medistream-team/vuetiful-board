@@ -2,14 +2,14 @@ name: Npm Publish
 on: 
   push:
     branches:
-      - feature/addGitFlow
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: feature/addGitFlow
+        ref: master
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
