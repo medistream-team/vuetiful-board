@@ -197,6 +197,20 @@ export default {
         item => (item.chartInfo.options.colors = selectedTheme[0].colors),
       );
     },
+    setMonochromeColor() {
+      const monochromeTheme = {
+        monochrome: {
+          enabled: true,
+          color: this.theme,
+          shadeTo: 'light',
+          shadeIntensity: 0.8,
+        },
+      };
+
+      for (const info of this.chartInfos) {
+        this.$set(info.options, 'theme', monochromeTheme);
+      }
+    },
   },
   created() {
     this.validateProps();
@@ -206,6 +220,11 @@ export default {
     this.addUniqueId();
 
     !this.theme ? this.setDefaultTheme() : this.setTheme();
+  },
+  watch: {
+    theme() {
+      this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
+    },
   },
 };
 </script>
