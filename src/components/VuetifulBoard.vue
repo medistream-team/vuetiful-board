@@ -203,13 +203,15 @@ export default {
           enabled: true,
           color: this.theme,
           shadeTo: 'light',
-          shadeIntensity: 0.8,
+          shadeIntensity: 0.9,
         },
       };
 
-      for (const info of this.chartInfos) {
-        this.$set(info.options, 'theme', monochromeTheme);
-      }
+      this.datasets.forEach(
+        item => (item.chartInfo.options.theme = monochromeTheme),
+      );
+
+      return this.bindChartInfos();
     },
   },
   created() {
