@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <!-- TODO: Monochrome color picker 서비스단으로 이동 -->
+    <div class="monochrome-color-picker">
+      <label clas="monochrome-color-picker-label" for="monochrome">Monochrome</label>
+      <input class="monochrome-color-picker-input" type="color" id="monochrome" name="monochrome" @change="setMonochromeColor" />
+    </div>
+
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
     <ul class="theme-swatches">
       <li class="theme-swatches-item" @click="switchTheme">
@@ -548,6 +554,9 @@ export default {
       // TODO: Theme swatches를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
       this.theme = 'hoge';
     },
+    setMonochromeColor(event) {
+      this.theme = event.target.value;
+    }
   },
 };
 </script>

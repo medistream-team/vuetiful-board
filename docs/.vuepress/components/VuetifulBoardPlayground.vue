@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div id="app">
+    <!-- TODO: Monochrome color picker 서비스단으로 이동 -->
+    <div class="monochrome-color-picker">
+      <label clas="monochrome-color-picker-label" for="monochrome">Monochrome</label>
+      <input class="monochrome-color-picker-input" type="color" id="monochrome" name="monochrome" @change="setMonochromeColor" />
+    </div>
+
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
     <ul class="theme-swatches">
       <li class="theme-swatches-item" @click="switchTheme">
@@ -316,7 +322,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 6, h: 12, i: '2', static: false
+            x: 0, y: 10, w: 6, h: 10, i: '2', static: false
           },
         },
         {
@@ -371,7 +377,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
+            x: 6, y: 10, w: 6, h: 10, i: '3', static: false
           },
         },
         {
@@ -434,7 +440,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 6, h: 12, i: '4', static: false
+            x: 0, y: 20, w: 6, h: 10, i: '4', static: false
           },
         },
         {
@@ -520,7 +526,7 @@
             },
           },
           gridInfo: {
-            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
+            x: 6, y: 20, w: 6, h: 10, i: '5', static: false
           }
         }
       ]"
@@ -529,7 +535,11 @@
 </template>
 
 <script>
+import VuetifulBoard from '../../../src/components/VuetifulBoard.vue';
+
 export default {
+  components: { VuetifulBoard },
+  name: 'App',
   data() {
     return {
       // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
@@ -544,8 +554,11 @@ export default {
       // TODO: Theme swatches를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
       this.theme = 'hoge';
     },
+    setMonochromeColor(event) {
+      this.theme = event.target.value;
+    }
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
