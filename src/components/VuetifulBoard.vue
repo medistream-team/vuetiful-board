@@ -98,6 +98,7 @@ export default {
         type: Array,
         palette,
       },
+      isFirstMount: true,
     };
   },
   methods: {
@@ -193,9 +194,19 @@ export default {
 
       const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
-      return this.datasets.forEach(
-        item => (item.chartInfo.options.colors = selectedTheme[0].colors),
-      );
+      if (this.isFirstMount) {
+        this.isFirstMount = false;
+
+        return this.datasets.forEach(
+          item => (item.chartInfo.options.colors = selectedTheme[0].colors),
+        );
+      } else {
+        this.datasets.forEach(
+          item => (item.chartInfo.options.colors = selectedTheme[0].colors),
+        );
+
+        return this.bindChartInfos();
+      }
     },
     setMonochromeColor() {
       const monochromeTheme = {
