@@ -1,4 +1,7 @@
 module.exports = {
+  devServer: {
+    host: 'localhost',
+  },
   css: {
     loaderOptions: {
       scss: {
