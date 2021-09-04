@@ -491,7 +491,6 @@ export default {
   name: 'App',
   data() {
     return {
-      // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
       theme: 'classic',
       layoutEditable: true,
       colNum: 12,
