@@ -142,7 +142,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
+            x: 6, y: 0, w: 6, h: 15, i: '1', static: false
           },
         },
         {
@@ -270,7 +270,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 6, h: 10, i: '2', static: false
+            x: 0, y: 10, w: 6, h: 12, i: '2', static: false
           },
         },
         {
@@ -325,7 +325,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 10, w: 6, h: 10, i: '3', static: false
+            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
           },
         },
         {
@@ -388,7 +388,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 6, h: 10, i: '4', static: false
+            x: 0, y: 20, w: 6, h: 12, i: '4', static: false
           },
         },
         {
@@ -474,7 +474,7 @@
             },
           },
           gridInfo: {
-            x: 6, y: 20, w: 6, h: 10, i: '5', static: false
+            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
           }
         }
       ]"
