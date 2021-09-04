@@ -9,7 +9,7 @@
     <div class="dark-mode-toggle-button">
       <label class="dark-mode-toggle-button-label">
         Dark Mode
-        <input class="dark-mode-toggle-button-input" type="checkbox" @change="toggleDarkMode" />
+        <input class="dark-mode-toggle-button-input" type="checkbox" v-model="darkMode" />
       </label>
     </div>
 
@@ -516,9 +516,6 @@ export default {
     },
     setMonochromeColor(event) {
       this.theme = event.target.value;
-    },
-    toggleDarkMode() {
-      this.darkMode = !this.darkMode;
     },
   },
 };
