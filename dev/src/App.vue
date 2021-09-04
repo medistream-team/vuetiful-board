@@ -3,7 +3,7 @@
     <!-- TODO: Monochrome color picker 서비스단으로 이동 -->
     <div class="monochrome-color-picker">
       <label class="monochrome-color-picker-label" for="monochrome">Monochrome</label>
-      <input class="monochrome-color-picker-input" type="color" id="monochrome" name="monochrome" @change="setMonochromeColor" />
+      <input class="monochrome-color-picker-input" type="color" id="monochrome" @change="setMonochromeColor" />
     </div>
 
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
