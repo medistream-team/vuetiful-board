@@ -2,7 +2,7 @@
   <div id="app">
     <!-- TODO: Monochrome color picker 서비스단으로 이동 -->
     <div class="monochrome-color-picker">
-      <label clas="monochrome-color-picker-label" for="monochrome">Monochrome</label>
+      <label class="monochrome-color-picker-label" for="monochrome">Monochrome</label>
       <input class="monochrome-color-picker-input" type="color" id="monochrome" name="monochrome" @change="setMonochromeColor" />
     </div>
 
