@@ -6,6 +6,13 @@
       <input class="monochrome-color-picker-input" type="color" id="monochrome" @change="setMonochromeColor" />
     </div>
 
+    <div class="dark-mode-toggle-button">
+      <label class="dark-mode-toggle-button-label">
+        Dark Mode
+        <input class="dark-mode-toggle-button-input" type="checkbox" @change="toggleDarkMode" />
+      </label>
+    </div>
+
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
     <ul class="theme-swatches" v-for="(swatch, index) in palette" :key="index">
       <li class="theme-swatches-item" v-for="theme in swatch" :key="theme.name" @click="switchTheme(theme.name)">
@@ -26,6 +33,7 @@
     <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
     <vuetiful-board
       :theme="theme"
+      :dark-mode="darkMode"
       :col-num="colNum"
       :row-height="rowHeight"
       :layout-editable="layoutEditable"
@@ -492,6 +500,7 @@ export default {
   data() {
     return {
       theme: 'classic',
+      darkMode: false,
       layoutEditable: true,
       colNum: 12,
       rowHeight: 30,
@@ -507,7 +516,10 @@ export default {
     },
     setMonochromeColor(event) {
       this.theme = event.target.value;
-    }
+    },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
+    },
   },
 };
 </script>
