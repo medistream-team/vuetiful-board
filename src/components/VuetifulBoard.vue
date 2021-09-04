@@ -68,6 +68,13 @@ export default {
                   type: null,
                 },
                 colors: palette[0].colors,
+                theme: {
+                  monochrome: {
+                    enabled: false,
+                    shadeTo: 'light',
+                    shadeIntensity: 0.9,
+                  },
+                },
               },
             },
             gridInfo: {
@@ -197,13 +204,29 @@ export default {
       if (this.isFirstMount) {
         this.isFirstMount = false;
 
-        return this.datasets.forEach(
-          item => (item.chartInfo.options.colors = selectedTheme[0].colors),
-        );
+        return this.datasets.forEach(item => {
+          item.chartInfo.options.colors = selectedTheme[0].colors;
+          item.chartInfo.options.theme = {
+            monochrome: {
+              enabled: false,
+              shadeTo: 'light',
+              shadeIntensity: 0.9,
+            },
+          };
+        });
       } else {
-        this.datasets.forEach(
-          item => (item.chartInfo.options.colors = selectedTheme[0].colors),
-        );
+        this.datasets.forEach(item => {
+          item.chartInfo.options.colors = selectedTheme[0].colors;
+          item.chartInfo.options.theme = {
+            monochrome: {
+              enabled: false,
+              shadeTo: 'light',
+              shadeIntensity: 0.9,
+            },
+          };
+
+          return item;
+        });
 
         return this.bindChartInfos();
       }
