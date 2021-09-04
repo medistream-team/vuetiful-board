@@ -7,63 +7,11 @@
     </div>
 
     <!-- TODO: Theme swatches 서비스단으로 이동 -->
-    <ul class="theme-swatches">
-      <li class="theme-swatches-item" @click="switchTheme">
-        <label class="theme-swatches-label" for="classic">
-          <input class="theme-swatches-checkbox" type="checkbox" id="classic" />
-          <span class="theme-swatches-name">Classic</span>
-          <span class="theme-swatches-palette">
-            <span class="hue primary"></span>
-            <span class="hue secondary"></span>
-            <span class="hue third"></span>
-            <span class="hue fourth"></span>
-            <span class="hue fifth"></span>
-          </span>
-        </label>
-      </li>
-      <li class="theme-swatches-item" @click="switchTheme">
-        <label class="theme-swatches-label" for="rainbow">
-          <input class="theme-swatches-checkbox" type="checkbox" id="rainbow" />
-          <span class="theme-swatches-name">Rainbow</span>
-          <span class="theme-swatches-palette">
-            <span class="hue primary"></span>
-            <span class="hue secondary"></span>
-            <span class="hue third"></span>
-            <span class="hue fourth"></span>
-            <span class="hue fifth"></span>
-          </span>
-        </label>
-      </li>
-      <li class="theme-swatches-item" @click="switchTheme">
-        <label class="theme-swatches-label" for="vintage">
-          <input class="theme-swatches-checkbox" type="checkbox" id="vintage" />
-          <span class="theme-swatches-name">Vintage</span>
-          <span class="theme-swatches-palette">
-            <span class="hue primary"></span>
-            <span class="hue secondary"></span>
-            <span class="hue third"></span>
-            <span class="hue fourth"></span>
-            <span class="hue fifth"></span>
-          </span>
-        </label>
-      </li>
-      <li class="theme-swatches-item" @click="switchTheme">
-        <label class="theme-swatches-label" for="retro">
-          <input class="theme-swatches-checkbox" type="checkbox" id="retro" />
-          <span class="theme-swatches-name">Retro</span>
-          <span class="theme-swatches-palette">
-            <span class="hue primary"></span>
-            <span class="hue secondary"></span>
-            <span class="hue third"></span>
-            <span class="hue fourth"></span>
-            <span class="hue fifth"></span>
-          </span>
-        </label>
-      </li>
-      <li class="theme-swatches-item" @click="switchTheme">
-        <label class="theme-swatches-label" for="green">
-          <input class="theme-swatches-checkbox" type="checkbox" id="green" />
-          <span class="theme-swatches-name">Green</span>
+    <ul class="theme-swatches" v-for="(swatch, index) in palette" :key="index">
+      <li class="theme-swatches-item" v-for="theme in swatch" :key="theme.name" @click="switchTheme(theme.name)">
+        <label class="theme-swatches-label" :for="theme.name">
+          <input class="theme-swatches-checkbox" type="checkbox" :id="theme.name" />
+          <span class="theme-swatches-name">{{ theme.name }}</span>
           <span class="theme-swatches-palette">
             <span class="hue primary"></span>
             <span class="hue secondary"></span>
@@ -194,7 +142,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
+            x: 6, y: 0, w: 6, h: 15, i: '1', static: false
           },
         },
         {
@@ -322,7 +270,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 6, h: 10, i: '2', static: false
+            x: 0, y: 10, w: 6, h: 12, i: '2', static: false
           },
         },
         {
@@ -377,7 +325,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 10, w: 6, h: 10, i: '3', static: false
+            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
           },
         },
         {
@@ -440,7 +388,7 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 6, h: 10, i: '4', static: false
+            x: 0, y: 20, w: 6, h: 12, i: '4', static: false
           },
         },
         {
@@ -526,7 +474,7 @@
             },
           },
           gridInfo: {
-            x: 6, y: 20, w: 6, h: 10, i: '5', static: false
+            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
           }
         }
       ]"
@@ -536,6 +484,7 @@
 
 <script>
 import VuetifulBoard from '../../../src/components/VuetifulBoard.vue';
+import palette from '../../../src/assets/palette.json';
 
 export default {
   components: { VuetifulBoard },
@@ -543,16 +492,19 @@ export default {
   data() {
     return {
       // TODO: Theme swatches에서 테마를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
-      theme: 'rainbow',
+      theme: 'classic',
       layoutEditable: true,
       colNum: 12,
-      rowHeight: 30
+      rowHeight: 30,
+      palette: {
+        type: Array,
+        palette,
+      },
     }
   },
   methods: {
-    switchTheme() {
-      // TODO: Theme swatches를 클릭하면 해당 테마의 이름을 가져와서 theme data에 바인딩
-      this.theme = 'hoge';
+    switchTheme(themeName) {
+      this.theme = themeName;
     },
     setMonochromeColor(event) {
       this.theme = event.target.value;
