@@ -178,7 +178,7 @@ export default {
         return item;
       });
     },
-    initFirstMountOption(selectedTheme) {
+    initFirstMountOptions(selectedTheme) {
       this.isFirstMount = false;
 
       return this.datasets.forEach(item => {
@@ -208,7 +208,7 @@ export default {
       const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
       if (this.isFirstMount) {
-        this.initFirstMountOption(selectedTheme);
+        this.initFirstMountOptions(selectedTheme);
       } else {
         this.datasets.forEach(item => {
           item.chartInfo.options.colors = selectedTheme[0].colors;
