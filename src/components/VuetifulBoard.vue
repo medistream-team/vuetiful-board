@@ -225,6 +225,9 @@ export default {
       return this.theme.startsWith('#') ? true : false;
     },
     setTheme() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+
       if (!palette.some(theme => theme.name === this.theme)) {
         return console.error(
           '[vuetiful-board warn] Invalid theme: Please check the theme name.',
@@ -260,6 +263,8 @@ export default {
       }
     },
     setMonochromeColor() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
       const monochromeTheme = {
         mode: this.isDarkMode(),
         monochrome: {
@@ -285,6 +290,8 @@ export default {
       return this.bindChartInfos();
     },
     setDarkMode() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
@@ -310,6 +317,8 @@ export default {
       this.bindChartInfos();
     },
     setLightMode() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
