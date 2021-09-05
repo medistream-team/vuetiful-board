@@ -103,12 +103,12 @@ export default {
       palette,
       isFirstMount: true,
       darkModeColorOptions: {
-        background: '#000',
+        background: 'rgba(65, 65, 65, 0.5)',
         foreColor: '#fff',
       },
       lightModeColorOptions: {
         background: '#fff',
-        foreColor: '#000',
+        foreColor: '#302f2f',
       },
     };
   },
