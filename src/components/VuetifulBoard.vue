@@ -196,15 +196,21 @@ export default {
 
       return this.datasets.forEach(item => {
         // TODO: colors와 theme에 (로컬 스토리지 등으로부터) 이전에 설정해두었던 테마, 컬러, 다크 모드의 옵션 값을 담기
-        item.chartInfo.options.colors = selectedTheme[0].colors;
-        item.chartInfo.options.theme = {
-          mode: this.isDarkMode(),
-          monochrome: {
-            enabled: false,
-            shadeTo: 'light',
-            shadeIntensity: 0.9,
-          },
-        };
+        (item.chartInfo.options.colors = selectedTheme[0].colors),
+          (item.chartInfo.options.theme = {
+            mode: this.isDarkMode(),
+            monochrome: {
+              enabled: false,
+              shadeTo: 'light',
+              shadeIntensity: 0.9,
+            },
+          }),
+          (item.chartInfo.options.chart = this.darkMode
+            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...item.chartInfo.options.chart,
+              });
       });
     },
     setDefaultTheme() {
@@ -231,9 +237,6 @@ export default {
         this.initFirstMountOptions(selectedTheme);
       } else {
         this.datasets.forEach(item => {
-          item.chartInfo.chart = this.darkMode
-            ? this.darkModeColorOptions
-            : this.lightModeColorOptions;
           item.chartInfo.options.colors = selectedTheme[0].colors;
           item.chartInfo.options.theme = {
             mode: this.isDarkMode(),
@@ -243,6 +246,12 @@ export default {
               shadeIntensity: 0.9,
             },
           };
+          item.chartInfo.options.chart = this.darkMode
+            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...item.chartInfo.options.chart,
+              };
 
           return item;
         });
@@ -261,9 +270,17 @@ export default {
         },
       };
 
-      this.datasets.forEach(
-        item => (item.chartInfo.options.theme = monochromeTheme),
-      );
+      this.datasets.forEach(item => {
+        item.chartInfo.options.theme = monochromeTheme;
+        item.chartInfo.options.chart = this.darkMode
+          ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+          : {
+              ...this.lightModeColorOptions,
+              ...item.chartInfo.options.chart,
+            };
+
+        return item;
+      });
 
       return this.bindChartInfos();
     },
@@ -280,7 +297,10 @@ export default {
 
       this.datasets.forEach(item => {
         item.chartInfo.options.theme = currentThemeOptions;
-        item.chartInfo.options.chart = this.darkModeColorOptions;
+        item.chartInfo.options.chart = {
+          ...item.chartInfo.options.chart,
+          ...this.darkModeColorOptions,
+        };
 
         return item;
       });
@@ -300,7 +320,10 @@ export default {
 
       this.datasets.forEach(item => {
         item.chartInfo.options.theme = currentThemeOptions;
-        item.chartInfo.options.chart = this.lightModeColorOptions;
+        item.chartInfo.options.chart = {
+          ...item.chartInfo.options.chart,
+          ...this.lightModeColorOptions,
+        };
 
         return item;
       });
