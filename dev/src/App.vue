@@ -556,6 +556,7 @@ export default {
 
   .theme-swatches-name {
     display: block;
+    color: #232323;
     font-size: 14px;
   }
 

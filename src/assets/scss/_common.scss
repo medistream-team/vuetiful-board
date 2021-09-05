@@ -1,1 +1,16 @@
 // common: 모든 컴포넌트에서 공용으로 사용되는 스타일을 지정
+
+@import 'theme-colors';
+
+$color-bg: var(--color-bg);
+$color-text: var(--color-text);
+
+body {
+  color: $color-text;
+  background-color: $color-bg;
+}
+
+.page {
+  color: $color-text;
+  background-color: $color-bg;
+}

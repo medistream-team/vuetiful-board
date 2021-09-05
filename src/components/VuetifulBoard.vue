@@ -103,12 +103,12 @@ export default {
       palette,
       isFirstMount: true,
       darkModeColorOptions: {
-        background: 'rgba(65, 65, 65, 0.5)',
+        background: 'rgba(70, 70, 70, 0.2)',
         foreColor: '#fff',
       },
       lightModeColorOptions: {
         background: '#fff',
-        foreColor: '#302f2f',
+        foreColor: '#232323',
       },
     };
   },
@@ -285,6 +285,8 @@ export default {
       return this.bindChartInfos();
     },
     setDarkMode() {
+      document.documentElement.dataset.theme = this.isDarkMode();
+
       const currentThemeOptions = {
         mode: this.isDarkMode(),
         monochrome: {
@@ -308,6 +310,8 @@ export default {
       this.bindChartInfos();
     },
     setLightMode() {
+      document.documentElement.dataset.theme = this.isDarkMode();
+
       const currentThemeOptions = {
         mode: this.isDarkMode(),
         monochrome: {
@@ -354,6 +358,7 @@ export default {
 <style lang="scss">
 .vue-grid-item {
   touch-action: none;
+  /* background-color: $white; */
 
   &:not(.vue-grid-placeholder) {
     border-radius: 13px;
