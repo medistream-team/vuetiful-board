@@ -93,18 +93,9 @@ export default {
   },
   data() {
     return {
-      gridInfos: {
-        type: Array,
-        required: false,
-      },
-      chartInfos: {
-        type: Array,
-        required: false,
-      },
-      palette: {
-        type: Array,
-        palette,
-      },
+      gridInfos: [],
+      chartInfos: [],
+      palette,
       isFirstMount: true,
     };
   },
