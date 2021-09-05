@@ -360,4 +360,8 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
   }
 }
+
+.apexcharts-svg {
+  border-radius: 13px;
+}
 </style>
