@@ -269,7 +269,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .vue-grid-item {
   touch-action: none;
 
