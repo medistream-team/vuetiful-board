@@ -72,7 +72,7 @@ export default {
             },
             gridInfo: {
               id: this.$uuid.v4(),
-              x: Math.round(this.colNum / 1),
+              x: this.colNum,
               y: Math.round(this.colNum / 3),
               w: Math.round(this.colNum / 2),
               h: this.colNum,
