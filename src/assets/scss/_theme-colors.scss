@@ -1,9 +1,14 @@
 :root {
-  --color-bg: #fff;
+  --color-app-background: #fff;
   --color-text: #232323;
 
   &[data-theme="dark"] {
-    --color-bg: #232323;
+    --color-app-background: #232323;
     --color-text: #fff;
+    --color-grid-item-background: #17191d;
   }
 }
+
+$color-app-background: var(--color-app-background);
+$color-text: var(--color-text);
+$color-grid-item-background: var(--color-grid-item-background);

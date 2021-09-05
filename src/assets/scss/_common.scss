@@ -2,15 +2,12 @@
 
 @import 'theme-colors';
 
-$color-bg: var(--color-bg);
-$color-text: var(--color-text);
-
 body {
   color: $color-text;
-  background-color: $color-bg;
+  background-color: $color-app-background;
 }
 
 .page {
   color: $color-text;
-  background-color: $color-bg;
+  background-color: $color-app-background;
 }

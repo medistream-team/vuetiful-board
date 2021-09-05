@@ -103,7 +103,7 @@ export default {
       palette,
       isFirstMount: true,
       darkModeColorOptions: {
-        background: 'rgba(70, 70, 70, 0.2)',
+        background: 'rgba(98, 104, 113, 0.35)',
         foreColor: '#fff',
       },
       lightModeColorOptions: {
@@ -356,9 +356,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/theme-colors';
+
 .vue-grid-item {
   touch-action: none;
-  /* background-color: $white; */
+  background-color: $color-grid-item-background;
 
   &:not(.vue-grid-placeholder) {
     border-radius: 13px;
