@@ -187,6 +187,21 @@ export default {
         return item;
       });
     },
+    initFirstMountOption(selectedTheme) {
+      this.isFirstMount = false;
+
+      return this.datasets.forEach(item => {
+        // TODO: colors와 theme에 (로컬 스토리지 등으로부터) 이전에 설정해두었던 테마, 컬러, 다크 모드의 옵션 값을 담기
+        item.chartInfo.options.colors = selectedTheme[0].colors;
+        item.chartInfo.options.theme = {
+          monochrome: {
+            enabled: false,
+            shadeTo: 'light',
+            shadeIntensity: 0.9,
+          },
+        };
+      });
+    },
     setDefaultTheme() {
       return this.datasets.forEach(
         item => (item.chartInfo.options.colors = palette[0].colors),
@@ -202,18 +217,7 @@ export default {
       const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
       if (this.isFirstMount) {
-        this.isFirstMount = false;
-
-        return this.datasets.forEach(item => {
-          item.chartInfo.options.colors = selectedTheme[0].colors;
-          item.chartInfo.options.theme = {
-            monochrome: {
-              enabled: false,
-              shadeTo: 'light',
-              shadeIntensity: 0.9,
-            },
-          };
-        });
+        this.initFirstMountOption(selectedTheme);
       } else {
         this.datasets.forEach(item => {
           item.chartInfo.options.colors = selectedTheme[0].colors;
@@ -270,7 +274,6 @@ export default {
   touch-action: none;
 
   &:not(.vue-grid-placeholder) {
-    background: #fff;
     border-radius: 13px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
   }
