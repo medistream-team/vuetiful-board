@@ -20,6 +20,8 @@
       >
         <apex-charts
           v-if="chartInfos[index]"
+          width="100%"
+          height="100%"
           :type="chartInfos[index].options.type"
           :series="chartInfos[index].series"
           :options="chartInfos[index].options"
