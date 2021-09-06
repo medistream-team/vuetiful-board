@@ -113,14 +113,21 @@ export default {
         background: '#fff',
         foreColor: '#232323',
       },
+      previousThemeColors: [],
     };
   },
   watch: {
+    datasets(newValue, oldValue) {
+      const oldColors = oldValue[0].chartInfo.options.colors;
+      this.savePreviousThemeColors(oldColors);
+    },
     theme() {
       this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
     },
     darkMode() {
-      this.darkMode ? this.setDarkMode() : this.setLightMode();
+      this.darkMode
+        ? this.setDarkMode(this.previousThemeColors)
+        : this.setLightMode(this.previousThemeColors);
     },
   },
   created() {
@@ -244,6 +251,9 @@ export default {
     isMonochromeMode() {
       return this.theme.startsWith('#') ? true : false;
     },
+    savePreviousThemeColors(oldColors) {
+      return (this.previousThemeColors = oldColors);
+    },
     setTheme() {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
       //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
@@ -308,7 +318,7 @@ export default {
       this.addUniqueId();
       return this.bindChartInfos();
     },
-    setDarkMode() {
+    setDarkMode(oldColors) {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
       //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
@@ -324,6 +334,7 @@ export default {
       };
 
       this.datasets.forEach(item => {
+        item.chartInfo.options.colors = oldColors;
         item.chartInfo.options.theme = currentThemeOptions;
         item.chartInfo.options.chart = {
           ...item.chartInfo.options.chart,
@@ -336,7 +347,7 @@ export default {
       this.addUniqueId();
       this.bindChartInfos();
     },
-    setLightMode() {
+    setLightMode(oldColors) {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
       //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
@@ -352,6 +363,7 @@ export default {
       };
 
       this.datasets.forEach(item => {
+        item.chartInfo.options.colors = oldColors;
         item.chartInfo.options.theme = currentThemeOptions;
         item.chartInfo.options.chart = {
           ...item.chartInfo.options.chart,
