@@ -21,7 +21,7 @@
   ],
   "files": [
     "src",
-    "dist/*.js"
+    "dist"
   ],
   "main": "dist/vuetiful-board.umd.min.js",
   "license": "MIT",
