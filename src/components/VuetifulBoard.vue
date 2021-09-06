@@ -373,6 +373,7 @@ export default {
         return item;
       });
 
+      this.addUniqueId();
       this.bindChartInfos();
     },
   },
