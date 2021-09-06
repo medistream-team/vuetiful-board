@@ -40,6 +40,10 @@ export default {
       type: String,
       default: palette[0].name,
     },
+    darkMode: {
+      type: Boolean,
+      default: false,
+    },
     colNum: {
       type: Number,
       required: true,
@@ -70,6 +74,14 @@ export default {
                   type: null,
                 },
                 colors: palette[0].colors,
+                theme: {
+                  mode: 'light',
+                  monochrome: {
+                    enabled: false,
+                    shadeTo: 'light',
+                    shadeIntensity: 0.9,
+                  },
+                },
               },
             },
             gridInfo: {
@@ -88,17 +100,17 @@ export default {
   },
   data() {
     return {
-      gridInfos: {
-        type: Array,
-        required: false,
+      gridInfos: [],
+      chartInfos: [],
+      palette,
+      isFirstMount: true,
+      darkModeColorOptions: {
+        background: 'rgba(98, 104, 113, 0.35)',
+        foreColor: '#fff',
       },
-      chartInfos: {
-        type: Array,
-        required: false,
-      },
-      palette: {
-        type: Array,
-        palette,
+      lightModeColorOptions: {
+        background: '#fff',
+        foreColor: '#232323',
       },
     };
   },
@@ -181,12 +193,43 @@ export default {
         return item;
       });
     },
+    initFirstMountOptions(selectedTheme) {
+      this.isFirstMount = false;
+
+      return this.datasets.forEach(item => {
+        // TODO: colors와 theme에 (로컬 스토리지 등으로부터) 이전에 설정해두었던 테마, 컬러, 다크 모드의 옵션 값을 담기
+        (item.chartInfo.options.colors = selectedTheme[0].colors),
+          (item.chartInfo.options.theme = {
+            mode: this.isDarkMode(),
+            monochrome: {
+              enabled: false,
+              shadeTo: 'light',
+              shadeIntensity: 0.9,
+            },
+          }),
+          (item.chartInfo.options.chart = this.darkMode
+            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...item.chartInfo.options.chart,
+              });
+      });
+    },
     setDefaultTheme() {
       return this.datasets.forEach(
         item => (item.chartInfo.options.colors = palette[0].colors),
       );
     },
+    isDarkMode() {
+      return this.darkMode ? 'dark' : 'light';
+    },
+    isMonochromeMode() {
+      return this.theme.startsWith('#') ? true : false;
+    },
     setTheme() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+
       if (!palette.some(theme => theme.name === this.theme)) {
         return console.error(
           '[vuetiful-board warn] Invalid theme: Please check the theme name.',
@@ -195,9 +238,112 @@ export default {
 
       const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
-      return this.datasets.forEach(
-        item => (item.chartInfo.options.colors = selectedTheme[0].colors),
-      );
+      if (this.isFirstMount) {
+        this.initFirstMountOptions(selectedTheme);
+      } else {
+        this.datasets.forEach(item => {
+          item.chartInfo.options.colors = selectedTheme[0].colors;
+          item.chartInfo.options.theme = {
+            mode: this.isDarkMode(),
+            monochrome: {
+              enabled: this.isMonochromeMode(),
+              shadeTo: 'light',
+              shadeIntensity: 0.9,
+            },
+          };
+          item.chartInfo.options.chart = this.darkMode
+            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...item.chartInfo.options.chart,
+              };
+
+          return item;
+        });
+
+        return this.bindChartInfos();
+      }
+    },
+    setMonochromeColor() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      const monochromeTheme = {
+        mode: this.isDarkMode(),
+        monochrome: {
+          enabled: this.isMonochromeMode(),
+          color: this.theme,
+          shadeTo: 'light',
+          shadeIntensity: 0.9,
+        },
+      };
+
+      this.datasets.forEach(item => {
+        item.chartInfo.options.theme = monochromeTheme;
+        item.chartInfo.options.chart = this.darkMode
+          ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
+          : {
+              ...this.lightModeColorOptions,
+              ...item.chartInfo.options.chart,
+            };
+
+        return item;
+      });
+
+      return this.bindChartInfos();
+    },
+    setDarkMode() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      document.documentElement.dataset.theme = this.isDarkMode();
+
+      const currentThemeOptions = {
+        mode: this.isDarkMode(),
+        monochrome: {
+          enabled: this.isMonochromeMode(),
+          color: this.theme,
+          shadeTo: 'light',
+          shadeIntensity: 0.9,
+        },
+      };
+
+      this.datasets.forEach(item => {
+        item.chartInfo.options.theme = currentThemeOptions;
+        item.chartInfo.options.chart = {
+          ...item.chartInfo.options.chart,
+          ...this.darkModeColorOptions,
+        };
+
+        return item;
+      });
+
+      this.bindChartInfos();
+    },
+    setLightMode() {
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
+      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      document.documentElement.dataset.theme = this.isDarkMode();
+
+      const currentThemeOptions = {
+        mode: this.isDarkMode(),
+        monochrome: {
+          enabled: this.isMonochromeMode(),
+          color: this.theme,
+          shadeTo: 'light',
+          shadeIntensity: 0.9,
+        },
+      };
+
+      this.datasets.forEach(item => {
+        item.chartInfo.options.theme = currentThemeOptions;
+        item.chartInfo.options.chart = {
+          ...item.chartInfo.options.chart,
+          ...this.lightModeColorOptions,
+        };
+
+        return item;
+      });
+
+      this.bindChartInfos();
     },
   },
   created() {
@@ -209,17 +355,31 @@ export default {
 
     !this.theme ? this.setDefaultTheme() : this.setTheme();
   },
+  watch: {
+    theme() {
+      this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
+    },
+    darkMode() {
+      this.darkMode ? this.setDarkMode() : this.setLightMode();
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../assets/scss/theme-colors';
+
 .vue-grid-item {
   touch-action: none;
+  background-color: $color-grid-item-background;
 
   &:not(.vue-grid-placeholder) {
-    background: #fff;
     border-radius: 13px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
   }
+}
+
+.apexcharts-svg {
+  border-radius: 13px;
 }
 </style>
