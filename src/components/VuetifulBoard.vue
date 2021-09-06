@@ -20,11 +20,12 @@
       >
         <apex-charts
           v-if="chartInfos[index]"
-          width="100%"
-          height="100%"
+          :key="chartInfos[index].id"
           :type="chartInfos[index].options.type"
           :series="chartInfos[index].series"
           :options="chartInfos[index].options"
+          width="100%"
+          height="100%"
         />
       </grid-item>
     </grid-layout>
@@ -202,7 +203,7 @@ export default {
       this.chartInfos = this.datasets.map(item => item.chartInfo);
     },
     addUniqueId() {
-      this.datasets.forEach(item => {
+      return this.datasets.forEach(item => {
         item.id = item.id ?? this.$uuid.v4();
         item.chartInfo.id = item.chartInfo.id ?? this.$uuid.v4();
         item.gridInfo.id = item.gridInfo.id ?? this.$uuid.v4();
@@ -278,6 +279,7 @@ export default {
           return item;
         });
 
+        this.addUniqueId();
         return this.bindChartInfos();
       }
     },
@@ -303,6 +305,7 @@ export default {
         return item;
       });
 
+      this.addUniqueId();
       return this.bindChartInfos();
     },
     setDarkMode() {
@@ -330,6 +333,7 @@ export default {
         return item;
       });
 
+      this.addUniqueId();
       this.bindChartInfos();
     },
     setLightMode() {
