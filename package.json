@@ -1,6 +1,6 @@
 {
   "name": "vuetiful-board",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
@@ -9,8 +9,19 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
+  "description": "Built a beautiful dashboard with charts using Vue.js.",
+  "keywords": [
+    "vuejs",
+    "vue",
+    "javascript",
+    "dashboard",
+    "chart",
+    "theme",
+    "dark-mode"
+  ],
   "files": [
-    "dist/vuetiful-board.umd.min.js"
+    "src",
+    "dist/*.js"
   ],
   "main": "dist/vuetiful-board.umd.min.js",
   "license": "MIT",
