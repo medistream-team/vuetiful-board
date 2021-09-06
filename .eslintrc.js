@@ -1,9 +1,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    browser: true,
   },
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+    '@vue/prettier',
+  ],
+  plugins: ['vue', 'prettier'],
   parserOptions: {
     parser: 'babel-eslint',
   },
@@ -16,16 +23,6 @@ module.exports = {
     quotes: ['warn', 'single'],
     semi: ['error', 'always'],
     indent: 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        tabWidth: 2,
-        singleQuote: true,
-        semi: true,
-        arrowParens: 'avoid',
-        endOfLine: 'auto',
-        trailingComma: 'all',
-      },
-    ],
+    'prettier/prettier': 'error',
   },
 };
