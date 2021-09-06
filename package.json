@@ -1,6 +1,6 @@
 {
   "name": "vuetiful-board",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "scripts": {
     "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
@@ -21,7 +21,7 @@
   ],
   "files": [
     "src",
-    "dist/*.js"
+    "dist"
   ],
   "main": "dist/vuetiful-board.umd.min.js",
   "license": "MIT",
