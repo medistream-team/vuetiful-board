@@ -10,13 +10,13 @@
     >
       <grid-item
         v-for="(item, index) in gridInfos"
+        :key="item.id"
         :x="item.x"
         :y="item.y"
         :w="item.w"
         :h="item.h"
         :i="item.i"
         :static="item.static"
-        :key="item.id"
       >
         <apex-charts
           v-if="chartInfos[index]"
@@ -113,6 +113,23 @@ export default {
         foreColor: '#232323',
       },
     };
+  },
+  watch: {
+    theme() {
+      this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
+    },
+    darkMode() {
+      this.darkMode ? this.setDarkMode() : this.setLightMode();
+    },
+  },
+  created() {
+    this.validateProps();
+    this.bindGridInfos();
+  },
+  mounted() {
+    this.addUniqueId();
+
+    !this.theme ? this.setDefaultTheme() : this.setTheme();
   },
   methods: {
     isType(element) {
@@ -281,10 +298,7 @@ export default {
         item.chartInfo.options.theme = monochromeTheme;
         item.chartInfo.options.chart = this.darkMode
           ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
-          : {
-              ...this.lightModeColorOptions,
-              ...item.chartInfo.options.chart,
-            };
+          : { ...this.lightModeColorOptions, ...item.chartInfo.options.chart };
 
         return item;
       });
@@ -344,23 +358,6 @@ export default {
       });
 
       this.bindChartInfos();
-    },
-  },
-  created() {
-    this.validateProps();
-    this.bindGridInfos();
-  },
-  mounted() {
-    this.addUniqueId();
-
-    !this.theme ? this.setDefaultTheme() : this.setTheme();
-  },
-  watch: {
-    theme() {
-      this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
-    },
-    darkMode() {
-      this.darkMode ? this.setDarkMode() : this.setLightMode();
     },
   },
 };
