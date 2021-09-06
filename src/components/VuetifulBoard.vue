@@ -20,6 +20,8 @@
       >
         <apex-charts
           v-if="chartInfos[index]"
+          width="100%"
+          height="100%"
           :type="chartInfos[index].options.type"
           :series="chartInfos[index].series"
           :options="chartInfos[index].options"
@@ -72,7 +74,7 @@ export default {
             },
             gridInfo: {
               id: this.$uuid.v4(),
-              x: Math.round(this.colNum / 1),
+              x: this.colNum,
               y: Math.round(this.colNum / 3),
               w: Math.round(this.colNum / 2),
               h: this.colNum,
