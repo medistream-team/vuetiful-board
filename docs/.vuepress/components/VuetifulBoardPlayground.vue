@@ -597,9 +597,9 @@ export default {
 
 .editBtn {
   padding: 7px;
-  border: 1px solid white;
+  border: 1px solid #fff;
   border-radius: 5px;
-  background: white;
+  background: #fff;
   cursor: pointer;
 }
 </style>
