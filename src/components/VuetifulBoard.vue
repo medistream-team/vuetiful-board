@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vuetiful-board">
     <grid-layout
       :layout.sync="gridInfos"
       :col-num="colNum"
