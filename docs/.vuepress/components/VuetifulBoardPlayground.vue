@@ -150,7 +150,7 @@
             }
           },
           gridInfo: {
-            x: 6, y: 0, w: 6, h: 15, i: '1', static: false
+            x: 6, y: 0, w: 6, h: 12, i: '1', static: false
           },
         },
         {
