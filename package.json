@@ -1,6 +1,6 @@
 {
   "name": "vuetiful-board",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "scripts": {
     "dev": "cd dev && vue-cli-service serve",
     "build": "vue-cli-service build ./src/index.js --target lib",
@@ -20,7 +20,6 @@
     "dark-mode"
   ],
   "files": [
-    "src",
     "dist"
   ],
   "main": "dist/vuetiful-board.umd.min.js",
