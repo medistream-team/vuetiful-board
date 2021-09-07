@@ -1,10 +1,11 @@
-// 최종적으로는 ../../dist/vuetifulBoard.min.js 가 되어야 합니다ㅎ
 import UUID from "vue-uuid";
-import VuetifulBoard from '../../src/index.js';
-
 import '../../src/assets/scss/index.scss';
 
-export default ({ Vue }) => {
+export default ({ Vue, isServer }) => {
   Vue.use(UUID);
-  Vue.use(VuetifulBoard);
+  if(!isServer){
+    await import('../../dist/vuetiful-board.umd.min.js').then(FullpageModalPlugin => {
+      Vue.use(FullpageModalPlugin.default)
+    })
+  }
 };
