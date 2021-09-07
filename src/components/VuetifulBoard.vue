@@ -106,7 +106,7 @@ export default {
       palette,
       isFirstMount: true,
       darkModeColorOptions: {
-        background: 'rgba(98, 104, 113, 0.35)',
+        background: 'transparent',
         foreColor: '#fff',
       },
       lightModeColorOptions: {
@@ -384,12 +384,18 @@ export default {
 @import '../assets/scss/theme-colors';
 
 .vue-grid-item {
+  padding: 20px;
   touch-action: none;
   background-color: $color-grid-item-background;
 
   &:not(.vue-grid-placeholder) {
     border-radius: 13px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    // 모바일 환경을 고려한 설정
+    padding: 5px;
   }
 }
 
