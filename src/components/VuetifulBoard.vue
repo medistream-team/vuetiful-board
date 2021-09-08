@@ -19,7 +19,7 @@
         :static="item.static"
       >
         <apex-charts
-          v-if="chartInfos[index]"
+          v-if="layoutReady"
           :key="chartInfos[index].id"
           :type="chartInfos[index].options.type"
           :series="chartInfos[index].series"
