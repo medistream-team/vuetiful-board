@@ -6,7 +6,7 @@
       :row-height="rowHeight"
       :is-draggable="layoutEditable"
       :is-resizable="layoutEditable"
-      @layout-ready="bindChartInfos"
+      @layout-ready="layoutReady = true"
     >
       <grid-item
         v-for="(item, index) in gridInfos"
@@ -102,8 +102,8 @@ export default {
   data() {
     return {
       gridInfos: [],
-      chartInfos: [],
       palette,
+      layoutReady: false,
       isFirstMount: true,
       darkModeColorOptions: {
         background: 'rgba(98, 104, 113, 0.35)',
@@ -116,13 +116,69 @@ export default {
       previousThemeColors: [],
     };
   },
+  computed: {
+    chartInfos: function() {
+      if (!this.layoutReady) return [];
+
+      if (this.theme.startsWith('#')) {
+        const monochromeTheme = {
+          mode: this.isDarkMode(),
+          monochrome: {
+            enabled: this.isMonochromeMode(),
+            color: this.theme,
+            shadeTo: 'light',
+            shadeIntensity: 0.9,
+          },
+        };
+
+        const chartInfos = this.datasets.map(item => item.chartInfo);
+        chartInfos.map(chartInfo => {
+          chartInfo.id = this.$uuid.v4();
+          chartInfo.options.theme = monochromeTheme;
+          chartInfo.options.chart = this.darkMode
+            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...chartInfo.options.chart,
+              };
+
+          return chartInfo;
+        });
+
+        return chartInfos;
+      }
+
+      const chartInfos = this.datasets.map(item => item.chartInfo);
+      const selectedTheme = palette.filter(theme => this.theme === theme.name);
+
+      chartInfos.map(chartInfo => {
+        chartInfo.id = this.$uuid.v4();
+        chartInfo.options.colors = selectedTheme[0].colors;
+        chartInfo.options.theme = {
+          mode: this.isDarkMode(),
+          monochrome: {
+            enabled: this.isMonochromeMode(),
+            shadeTo: 'light',
+            shadeIntensity: 0.9,
+          },
+        };
+        chartInfo.options.chart = this.darkMode
+          ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
+          : {
+              ...this.lightModeColorOptions,
+              ...chartInfo.options.chart,
+            };
+
+        return chartInfo;
+      });
+
+      return chartInfos;
+    },
+  },
   watch: {
     datasets(newValue, oldValue) {
       const oldColors = oldValue[0].chartInfo.options.colors;
       this.savePreviousThemeColors(oldColors);
-    },
-    theme() {
-      this.theme.startsWith('#') ? this.setMonochromeColor() : this.setTheme();
     },
     darkMode() {
       this.darkMode
@@ -136,8 +192,6 @@ export default {
   },
   mounted() {
     this.addUniqueId();
-
-    !this.theme ? this.setDefaultTheme() : this.setTheme();
   },
   methods: {
     isType(element) {
@@ -206,9 +260,6 @@ export default {
     bindGridInfos() {
       this.gridInfos = this.datasets.map(item => item.gridInfo);
     },
-    bindChartInfos() {
-      this.chartInfos = this.datasets.map(item => item.chartInfo);
-    },
     addUniqueId() {
       return this.datasets.forEach(item => {
         item.id = item.id ?? this.$uuid.v4();
@@ -253,45 +304,6 @@ export default {
     },
     savePreviousThemeColors(oldColors) {
       return (this.previousThemeColors = oldColors);
-    },
-    setTheme() {
-      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
-      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
-
-      if (!palette.some(theme => theme.name === this.theme)) {
-        return console.error(
-          '[vuetiful-board warn] Invalid theme: Please check the theme name.',
-        );
-      }
-
-      const selectedTheme = palette.filter(theme => this.theme === theme.name);
-
-      if (this.isFirstMount) {
-        this.initFirstMountOptions(selectedTheme);
-      } else {
-        this.datasets.forEach(item => {
-          item.chartInfo.options.colors = selectedTheme[0].colors;
-          item.chartInfo.options.theme = {
-            mode: this.isDarkMode(),
-            monochrome: {
-              enabled: this.isMonochromeMode(),
-              shadeTo: 'light',
-              shadeIntensity: 0.9,
-            },
-          };
-          item.chartInfo.options.chart = this.darkMode
-            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
-            : {
-                ...this.lightModeColorOptions,
-                ...item.chartInfo.options.chart,
-              };
-
-          return item;
-        });
-
-        this.addUniqueId();
-        return this.bindChartInfos();
-      }
     },
     setMonochromeColor() {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
