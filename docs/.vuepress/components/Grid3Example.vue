@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- TODO: Monochrome color picker 서비스단으로 이동 -->
     <div class="monochrome-color-picker">
       <label class="monochrome-color-picker-label" for="monochrome">Monochrome</label>
       <input class="monochrome-color-picker-input" type="color" id="monochrome" @change="setMonochromeColor" />
@@ -13,24 +12,15 @@
       </label>
     </div>
 
-    <!-- TODO: Theme swatches 서비스단으로 이동 -->
-    <ul class="theme-swatches" v-for="(swatch, index) in palette" :key="index">
+  <ul class="theme-swatches" v-for="(swatch, index) in palette" :key="index">
       <li class="theme-swatches-item" v-for="theme in swatch" :key="theme.name" @click="switchTheme(theme.name)">
         <label class="theme-swatches-label" :for="theme.name">
           <input class="theme-swatches-checkbox" type="checkbox" :id="theme.name" />
           <span class="theme-swatches-name">{{ theme.name }}</span>
-          <span class="theme-swatches-palette">
-            <span class="hue primary"></span>
-            <span class="hue secondary"></span>
-            <span class="hue third"></span>
-            <span class="hue fourth"></span>
-            <span class="hue fifth"></span>
-          </span>
         </label>
       </li>
     </ul>
-
-    <button class="editBtn" @click="layoutEditable = !layoutEditable">Edit</button>
+ <button class="editBtn" @click="layoutEditable = !layoutEditable">🖊</button>
     <vuetiful-board
       :theme="theme"
       :dark-mode="darkMode"
@@ -40,77 +30,34 @@
       :datasets="[
         {
           chartInfo: {
-            series: [
-              {
-                name: '간판',
-                data: [27, 38, 19, 26, 19, 31, 27, 20, 28, 36, 37, 38],
-              },
-              {
-                name: '지인 소개',
-                data: [17, 11, 24, 26, 18, 14, 19, 12, 14, 17, 15, 16],
-              },
-              {
-                name: '소문',
-                data: [5, 5, 9, 12, 4, 6, 5, 3, 4, 4, 6, 8],
-              },
-              {
-                name: '홈페이지',
-                data: [2, 5, 4, 4, 2, 3, 6, 2, 2, 7, 2, 1],
-              },
-              {
-                name: '네이버 블로그',
-                data: [4, 1, 3, 1, 3, 3, 2, 2, 4, 4, 5, 4],
-              },
-              {
-                name: '카톡 채널',
-                data: [0, 0, 0, 1, 1, 0, 2, 1, 1, 0, 0, 0],
-              },
-              {
-                name: '기타',
-                data: [45, 1, 4, 7, 8, 7, 5, 3, 6, 4, 1, 1],
-              },
-            ],
+            series: [153, 73, 20, 23, 31, 8, 22],
             options: {
               chart: {
-                type: 'bar',
-                stacked: true,
-                stackType: '100%',
-              },
-              plotOptions: {
-                bar: {
-                  horizontal: true,
-                },
+                type: 'pie',
               },
               title: {
-                text: '최근 유입 경로 추이',
+                text: 'The recent trend of inflow (2021)',
                 align: 'center',
                 style: {
                   fontSize: '18px',
                   fontWeight: 'bold',
                 },
               },
-              xaxis: {
-                categories: [
-                  '2020-07',
-                  '2020-08',
-                  '2020-09',
-                  '2020-10',
-                  '2020-11',
-                  '2020-12',
-                  '2021-01',
-                  '2021-02',
-                  '2021-03',
-                  '2021-04',
-                  '2021-05',
-                  '2021-06',
-                ],
-              },
+              labels: [
+                'Advertisement',
+                'Recommend',
+                'Rumor',
+                'Homepage',
+                'Blog',
+                'Social Flatform Channel',
+                'ETC',
+              ],
               fill: {
                 opacity: 1,
               },
               legend: {
-                position: 'bottom'
-              },
+                position: 'bottom',
+              }
             }
           },
           gridInfo: {
@@ -119,13 +66,13 @@
         },
         {
           chartInfo: {
-            series: [186, 93, 30, 20, 21, 4, 20],
+            series: [40, 243, 180, 63, 101, 88],
             options: {
               chart: {
                 type: 'pie',
               },
               title: {
-                text: '최근 유입 경로 (2021년)',
+                text: 'The age of inflow',
                 align: 'center',
                 style: {
                   fontSize: '18px',
@@ -133,13 +80,12 @@
                 },
               },
               labels: [
-                '간판',
-                '지인 소개',
-                '소문',
-                '홈페이지',
-                '네이버 블로그',
-                '카톡 채널',
-                '기타',
+                'Teenagers',
+                '20s',
+                '30s',
+                '40s',
+                '50s',
+                '60s'
               ],
               fill: {
                 opacity: 1,
@@ -157,24 +103,24 @@
           chartInfo: {
             series: [
               {
-                name: '총 진료비 (2019)',
+                name: 'Total medical expenses (2019)',
                 type: 'bar',
-                data: [46632870, 41584730, 52955270, 48567390, 58018330, 55539980, 58520700, 49065550, 50117730, 58495400, 48557530, 48517400],
+                data: [46632430, 42454730, 52245270, 42039450, 58010291, 53041980, 34520700, 47295028, 39572103, 59104839, 50284193, 47032950],
               },
               {
-                name: '총 진료비 (2020)',
+                name: 'Total medical expenses (2020)',
                 type: 'bar',
-                data: [39924170, 41147250, 35482200, 40162390, 67997690, 64065550, 49789670, 46006220, 47063870, 50758110, 47677190, 49274240]
+                data: [39294770, 49817250, 50493023, 41903759, 60795049, 60385940, 59483928, 57694739, 49586758, 30495823, 49586584, 59484938]
               },
               {
-                name: '성장률 (2019)',
+                name: 'Growth rate (2019)',
                 type: 'line',
-                data: [null, null, null, null, null, null, null, null, 160, 34, 13, 32]
+                data: [null, null, null, null, null, null, null, null, 130, 24, 33, 12]
               },
               {
-                name: '성장률 (2020)',
+                name: 'Growth rate (2020)',
                 type: 'line',
-                data: [-14, -1, -33, -17, 17, 15, -15, -6, -6, -13, -2, 2]
+                data: [-13, -2, -23, -12, 21, 19, -10, -3, -2, -14, -1, 6]
               },
             ],
             options: {
@@ -182,7 +128,7 @@
                 type: 'line',
               },
               title: {
-                text: '총 진료비',
+                text: 'Total medical expenses',
                 align: 'center',
                 style: {
                   fontSize: '18px',
@@ -193,13 +139,13 @@
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 labels: {
                   formatter: function(value) {
-                    return `${value}월`;
+                    return `${value} Month`;
                   }
                 }
               },
               yaxis: [
                 {
-                  seriesName: '총 진료비 (2019)',
+                  seriesName: 'Total medical expenses (2019)',
                   axisTicks: {
                     show: true
                   },
@@ -207,18 +153,18 @@
                     show: true,
                   },
                   title: {
-                    text: '총 진료비'
+                    text: 'Total medical expenses'
                   },
                   max: 80000000
                 },
                 {
-                  seriesName: '총 진료비 (2020)',
+                  seriesName: 'Total medical expenses (2020)',
                   show: false,
                   max: 80000000
                 },
                 {
                   opposite: true,
-                  seriesName: '성장률 (2019)',
+                  seriesName: 'Growth Rate (2019)',
                   axisTicks: {
                     show: true
                   },
@@ -226,7 +172,7 @@
                     show: true,
                   },
                   title: {
-                    text: '성장률'
+                    text: 'Growth Rate'
                   },
                   min: -50,
                   max: 200,
@@ -237,7 +183,7 @@
                   }
                 },
                 {
-                  seriesName: '성장률 (2020)',
+                  seriesName: 'Growth Rate (2020)',
                   show: false,
                   min: -50,
                   max: 200,
@@ -278,23 +224,23 @@
             }
           },
           gridInfo: {
-            x: 0, y: 10, w: 6, h: 12, i: '2', static: false
+            x: 0, y: 10, w: 12, h: 12, i: '2', static: false
           },
         },
         {
           chartInfo: {
             series: [
               {
-                name: '2019년',
-                data: [104, 87, 110, 105, 137, 112, 114, 108, 85, 103, 87, 78]
+                name: '2019 Year',
+                data: [98, 72, 103, 85, 127, 102, 104, 78, 65, 133, 77, 72]
               },
               {
-                name: '2020년',
-                data: [82, 60, 102, 114, 166, 142, 117, 104, 106, 136, 122, 105]
+                name: '2020 Year',
+                data: [74, 70, 109, 124, 143, 112, 118, 124, 126, 112, 108, 126]
               },
               {
-                name: '2021년',
-                data: [128, 87, 58, 74, 73, 73, null, null, null, null, null, null]
+                name: '2021 Year',
+                data: [130, 57, 68, 79, 75, 74, null, null, null, null, null, null]
               }
             ],
             options: {
@@ -302,7 +248,7 @@
                 type: 'bar',
               },
               title: {
-                text: '신규 환자 수',
+                text: 'The number of new patients',
                 align: 'center',
                 style: {
                   fontSize: '18px',
@@ -313,7 +259,7 @@
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 labels: {
                   formatter: function(value) {
-                    return `${value}월`;
+                    return `${value} Month`;
                   }
                 },
               },
@@ -333,19 +279,19 @@
             }
           },
           gridInfo: {
-            x: 6, y: 10, w: 6, h: 12, i: '3', static: false
+            x: 0, y: 5, w: 6, h: 10, i: '3', static: false
           },
         },
         {
           chartInfo: {
             series: [
               {
-                name: '2020년',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                name: '2020 Year',
+                data: [0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 4, 3]
               },
               {
-                name: '2021년',
-                data: [0, 0, 20, 17, 8, 10, 0, 0, 0, 0, 0, 0]
+                name: '2021 Year',
+                data: [0, 0, 18, 15, 5, 8, 4, 6, 0, 0, 1, 0]
               }
             ],
             options: {
@@ -353,7 +299,7 @@
                 type: 'line',
               },
               title: {
-                text: '예약 취소율',
+                text: 'Cancellation rate',
                 align: 'center',
                 style: {
                   fontSize: '18px',
@@ -364,7 +310,7 @@
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 labels: {
                   formatter: function(value) {
-                    return `${value}월`;
+                    return `${value} Month`;
                   }
                 },
               },
@@ -396,21 +342,21 @@
             }
           },
           gridInfo: {
-            x: 0, y: 20, w: 6, h: 12, i: '4', static: false
+            x: 6, y: 10, w: 6, h: 10, i: '4', static: false
           },
         },
         {
           chartInfo: {
             series: [
               {
-                name: '65세 이상 환자 수',
+                name: 'The number of patients aged 65 or older',
                 type: 'column',
-                data: [125, 207, 218, 191, 241, 258, 204, 217, 294, 252, 208, 126, 217, 259, 257, 213]
+                data: [113, 203, 118, 161, 141, 139, 198, 113, 134, 131, 128, 223, 216, 290, 177, 212]
               },
               {
-                name: '성장률',
+                name: 'Growth Rate',
                 type: 'line',
-                data: [null, 66, 74, 53, 93, 106, 63, 74, 135, 102, 66, 1, 74, 107, 106, 70]
+                data: [54, 46, 64, 43, 97, 108, 64, 79, 134, 109, 58, 5, 78, 79, 105, 58]
               }
             ],
             options: {
@@ -418,7 +364,7 @@
                 type: 'line',
               },
               title: {
-                text: '시작일 대비 65세 이상 환자 수',
+                text: 'The number of patients aged 65 or older',
                 align: 'center',
                 style: {
                   fontSize: '18px',
@@ -431,13 +377,13 @@
               yaxis: [
                 {
                   title: {
-                    text: '환자 수'
+                    text: 'The number of patients'
                   }
                 },
                 {
                   opposite: true,
                   title: {
-                    text: '성장률'
+                    text: 'Growth Rate'
                   },
                   min: -50,
                   max: 200,
@@ -458,7 +404,7 @@
                       color: '#fff',
                       background: '#ff4560',
                     },
-                    text: '시작일 환자 수',
+                    text: 'The number of patients on starting date',
                   }
                 }],
               },
@@ -482,7 +428,7 @@
             },
           },
           gridInfo: {
-            x: 6, y: 20, w: 6, h: 12, i: '5', static: false
+            x: 6, y: 12, w: 12, h: 10, i: '5', static: false
           }
         }
       ]"
@@ -516,12 +462,17 @@ export default {
     },
     setMonochromeColor(event) {
       this.theme = event.target.value;
-    }, 
+    },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
+.dark-mode-toggle-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .theme-swatches {
   display: flex;
   justify-content: space-between;
@@ -558,48 +509,13 @@ export default {
     display: block;
     color: #232323;
     font-size: 14px;
-  }
-
-  .hue {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #fff;
-    vertical-align: middle;
-
-    // TODO: 테마별 색상으로 바인딩하기
-    &.primary {
-      background: #5975fe;
-    }
-
-    &.secondary {
-      background: #54d2d2;
-    }
-
-    &.third {
-      background: #ffcb00;
-    }
-
-    &.fourth {
-      background: #ff6150;
-    }
-
-    &.fifth {
-      background: #1360bf;
-    }
-
-    & + .hue {
-      margin-left: -6px;
-    }
-  }
+  } 
 }
 
 .editBtn {
   padding: 7px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  background: #fff;
+  border: none;
+  background: transparent;
   cursor: pointer;
 }
 </style>
