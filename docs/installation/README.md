@@ -26,7 +26,3 @@
   border-bottom: none;
 }
 </style>
-
-<script>
-  document.documentElement.dataset.theme = 'light';
-</script>
