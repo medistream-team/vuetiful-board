@@ -120,6 +120,8 @@ export default {
     chartInfos: function() {
       if (!this.layoutReady) return [];
 
+      document.documentElement.dataset.theme = this.isDarkMode();
+
       if (this.theme.startsWith('#')) {
         const monochromeTheme = {
           mode: this.isDarkMode(),
@@ -280,7 +282,6 @@ export default {
     },
     setDarkMode(oldColors) {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
-      document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
         mode: this.isDarkMode(),
@@ -307,7 +308,6 @@ export default {
     },
     setLightMode(oldColors) {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
-      document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
         mode: this.isDarkMode(),
