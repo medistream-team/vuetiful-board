@@ -269,28 +269,6 @@ export default {
         return item;
       });
     },
-    initFirstMountOptions(selectedTheme) {
-      this.isFirstMount = false;
-
-      return this.datasets.forEach(item => {
-        // TODO: colors와 theme에 (로컬 스토리지 등으로부터) 이전에 설정해두었던 테마, 컬러, 다크 모드의 옵션 값을 담기
-        (item.chartInfo.options.colors = selectedTheme[0].colors),
-          (item.chartInfo.options.theme = {
-            mode: this.isDarkMode(),
-            monochrome: {
-              enabled: false,
-              shadeTo: 'light',
-              shadeIntensity: 0.9,
-            },
-          }),
-          (item.chartInfo.options.chart = this.darkMode
-            ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
-            : {
-                ...this.lightModeColorOptions,
-                ...item.chartInfo.options.chart,
-              });
-      });
-    },
     setDefaultTheme() {
       return this.datasets.forEach(
         item => (item.chartInfo.options.colors = palette[0].colors),
@@ -306,8 +284,7 @@ export default {
       return (this.previousThemeColors = oldColors);
     },
     setMonochromeColor() {
-      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
-      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
       const monochromeTheme = {
         mode: this.isDarkMode(),
         monochrome: {
@@ -327,12 +304,10 @@ export default {
         return item;
       });
 
-      this.addUniqueId();
-      return this.bindChartInfos();
+      return this.addUniqueId();
     },
     setDarkMode(oldColors) {
-      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
-      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
@@ -356,12 +331,10 @@ export default {
         return item;
       });
 
-      this.addUniqueId();
-      this.bindChartInfos();
+      return this.addUniqueId();
     },
     setLightMode(oldColors) {
-      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하고,
-      //       테마, 모노크롬, 다크모드 적용 함수에서 옵션 추가후 bindChartInfos를 실행하는 로직이 반복되고 있는 부분 수정 필요
+      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
 
       const currentThemeOptions = {
@@ -385,8 +358,7 @@ export default {
         return item;
       });
 
-      this.addUniqueId();
-      this.bindChartInfos();
+      return this.addUniqueId();
     },
   },
 };
