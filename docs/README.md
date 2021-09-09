@@ -10,7 +10,9 @@
 
 <br>
 
+<div align="center">
 <img class="demo" src="./.vuepress/public/demovideo.gif"/>
+</div>
 
 <style>
   .logo {
