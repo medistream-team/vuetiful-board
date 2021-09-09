@@ -476,7 +476,7 @@ export default {
   data() {
     return {
       theme: 'classic',
-      darkMode: false,
+      darkMode: true,
       layoutEditable: true,
       colNum: 12,
       rowHeight: 30,
