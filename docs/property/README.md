@@ -234,14 +234,6 @@ If you want to use color palette for theme, you can refer this page [palette.jso
 
 ```
 
-<!--테마 관련 예시 문서 첨부하기-->
-
-
-<!-- <li>required: <code>true</code></li>
-
-<br> -->
-
-
 <br>
 
 ### darkMode
@@ -253,15 +245,13 @@ If you want to use color palette for theme, you can refer this page [palette.jso
 
 <br>
 
-
-<!-- <li>required: <code>true</code></li>
-
-<br> -->
-
-
 <li>default: <code>false</code></li>
 
 
 <br>
 
 Says if you want to set the dark mode (switch effect of background and font color).
+
+<script>
+  document.documentElement.dataset.theme = 'light';
+</script>

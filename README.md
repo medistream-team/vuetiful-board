@@ -1,5 +1,8 @@
-
-<img align="center" src="docs/.vuepress/public/VuetifulBoard.svg">
+<p align="center">
+  <a href="https://github.com/medistream-team/vuetiful-board" target="_blank">
+    <img width="150" src="docs/.vuepress/public/VuetifulBoard.svg" />
+  </a>
+</p>
 
 <h1 align="center">💐 Vuetiful-Board</h1>
 
@@ -9,7 +12,6 @@
 <p align="center">
 <img src="https://img.shields.io/static/v1?label=javascript&message=ES6&color=yellow">
 <img src="https://img.shields.io/static/v1?label=vue&message=2.x&color=green">
-<img src="https://img.shields.io/static/v1?label=license&message=MIT,CC&color=blue">
 </p>
 
 # Table of contents

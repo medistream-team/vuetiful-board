@@ -61,25 +61,6 @@ If you want more detail information about these, please refer to this page. [exp
   />
 ```
 
-<h3>Or you can set datas like below</h3>
-<br>
-
-```javascript
-data() {
-    return {
-      theme: 'classic',
-      darkMode: false,
-      layoutEditable: true,
-      colNum: 12,
-      rowHeight: 30,
-      palette: {
-        type: Array,
-        palette,
-      },
-    }
-  },
-```
-
 <h2 class="easy-text"> 🎉 You can easily use! </h2>
 
 <style>
@@ -87,3 +68,7 @@ data() {
   border-bottom: none;
 }
 </style>
+
+<script>
+  document.documentElement.dataset.theme = 'light';
+</script>

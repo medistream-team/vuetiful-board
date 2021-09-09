@@ -20,8 +20,13 @@
 
 <h2 class="easy-text"> 🎉 easy! </h2>
 
+
 <style>
 .easy-text {
   border-bottom: none;
 }
 </style>
+
+<script>
+  document.documentElement.dataset.theme = 'light';
+</script>
