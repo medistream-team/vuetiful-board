@@ -1,5 +1,3 @@
-#
-<!-- <img src="./.vuepress/public/VuetifulBoardLogo.jpg" alt="vuetiful-board-logo-img"> -->
 <p align="center">
   <a href="https://github.com/medistream-team/vuetiful-board" target="_blank">
     <img src="./.vuepress/public/VuetifulBoard.svg" />
