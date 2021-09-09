@@ -19,7 +19,7 @@ module.exports = {
             'usage/',
             'property/',
             'explanation/',
-            'feature/',
+            'features/',
           ]
         },
         {

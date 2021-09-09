@@ -1,5 +1,4 @@
-# Feature
-
+# Features
 ## Drag & Drop / Resize
 
 <br>
@@ -12,7 +11,7 @@ Vuetiful-board supports drag & drop and resize functions. <br>You can drag it in
 
 <br>
 
-<img src="./dragresize.gif" />
+<img src="./../.vuepress/public/dragresize.gif" />
 
 
 <br>
@@ -39,7 +38,7 @@ switchTheme(themeName) {
 
 <br>
 
-<img src="./theme.gif" />
+<img src="./../.vuepress/public/theme.gif" />
 
 
 <br>
@@ -57,7 +56,7 @@ Vuetiful-board supports dark mode. <br>When dark mode is selected, both the char
 
 <br>
 
-<img src="./darkmode.gif" />
+<img src="./../.vuepress/public/darkmode.gif" />
 
 <br>
 <br>
@@ -76,4 +75,4 @@ setMonochromeColor(event) {
 
 <br>
 
-<img src="./monochrome.gif" />
+<img src="./../.vuepress/public/monochrome.gif" />
