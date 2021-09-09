@@ -76,7 +76,3 @@ setMonochromeColor(event) {
 <br>
 
 <img src="./../.vuepress/public/monochrome.gif" width="100%"/>
-
-<script>
-  document.documentElement.dataset.theme = 'light';
-</script>

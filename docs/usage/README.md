@@ -68,7 +68,3 @@ If you want more detail information about these, please refer to this page. [exp
   border-bottom: none;
 }
 </style>
-
-<script>
-  document.documentElement.dataset.theme = 'light';
-</script>
