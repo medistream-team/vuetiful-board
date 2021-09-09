@@ -278,29 +278,6 @@ export default {
     savePreviousThemeColors(oldColors) {
       return (this.previousThemeColors = oldColors);
     },
-    setMonochromeColor() {
-      // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
-      const monochromeTheme = {
-        mode: this.isDarkMode(),
-        monochrome: {
-          enabled: this.isMonochromeMode(),
-          color: this.theme,
-          shadeTo: 'light',
-          shadeIntensity: 0.9,
-        },
-      };
-
-      this.datasets.forEach(item => {
-        item.chartInfo.options.theme = monochromeTheme;
-        item.chartInfo.options.chart = this.darkMode
-          ? { ...item.chartInfo.options.chart, ...this.darkModeColorOptions }
-          : { ...this.lightModeColorOptions, ...item.chartInfo.options.chart };
-
-        return item;
-      });
-
-      return this.addUniqueId();
-    },
     setDarkMode(oldColors) {
       // TODO: 기존에 존재하는 옵션을 바탕으로 (살린 채로) 테마 관련 옵션을 추가해주어야 하는 로직 수정 필요
       document.documentElement.dataset.theme = this.isDarkMode();
