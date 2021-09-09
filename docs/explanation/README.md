@@ -113,7 +113,3 @@ options: {
 //Example
 x: 0, y: 0, w: 6, h: 12, i: '0', static: false
 ```
-
-<script>
-  document.documentElement.dataset.theme = 'light';
-</script>

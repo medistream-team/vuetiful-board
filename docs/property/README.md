@@ -251,7 +251,3 @@ If you want to use color palette for theme, you can refer this page [palette.jso
 <br>
 
 Says if you want to set the dark mode (switch effect of background and font color).
-
-<script>
-  document.documentElement.dataset.theme = 'light';
-</script>
