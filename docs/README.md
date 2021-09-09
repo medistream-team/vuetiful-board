@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/medistream-team/vuetiful-board" target="_blank">
-    <img class="logo-img"src="./.vuepress/public/VuetifulBoard.svg" />
+    <img class="logo" src="./.vuepress/public/VuetifulBoard.svg" />
   </a>
 </p>
 
@@ -10,13 +10,10 @@
 
 <br>
 
-<div align="center">
-    <img class="demo" src="./.vuepress/public/demovideo.gif"/>
-</div>
-
+<img class="demo" src="./.vuepress/public/demovideo.gif"/>
 
 <style>
-  .logo-img {
+  .logo {
     width: 260px;
   }
 
