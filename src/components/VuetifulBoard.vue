@@ -269,11 +269,6 @@ export default {
         return item;
       });
     },
-    setDefaultTheme() {
-      return this.datasets.forEach(
-        item => (item.chartInfo.options.colors = palette[0].colors),
-      );
-    },
     isDarkMode() {
       return this.darkMode ? 'dark' : 'light';
     },
