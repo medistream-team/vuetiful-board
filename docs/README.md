@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/medistream-team/vuetiful-board" target="_blank">
-    <img src="./.vuepress/public/VuetifulBoard.svg" />
+    <img class="logo" src="./.vuepress/public/VuetifulBoard.svg" />
   </a>
 </p>
 
@@ -8,9 +8,19 @@
 
 <p align="center">Draw and move the chart as you wish!</p>
 
+<br>
+
+<div align="center">
+<img class="demo" src="./.vuepress/public/demovideo.gif"/>
+</div>
+
 <style>
-  img {
+  .logo {
     width: 260px;
+  }
+
+  .demo {
+    width: 800px;
   }
 
   h2 {

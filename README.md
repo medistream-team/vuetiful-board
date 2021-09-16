@@ -14,6 +14,9 @@
 <img src="https://img.shields.io/static/v1?label=vue&message=2.x&color=green">
 </p>
 
+# Documentation
+👉🏻 [Please Click Here!](https://medistream-team.github.io/vuetiful-board/)
+
 # Table of contents
 
 - [Installation](#Install)
@@ -479,4 +482,4 @@ setMonochromeColor(event) {
 # 📝 License
 
 Copyright © 2021 [Medistream](https://github.com/medistream-team)<br />
-This project is [MIT](https://github.com/medistream-team/vue-fullpage-modal/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/medistream-team/vuetiful-board/blob/master/LICENSE) licensed.
