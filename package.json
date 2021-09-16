@@ -44,6 +44,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.38.0",
     "sass-loader": "^10.2.0",
+    "set-value": "^4.1.0",
     "uuid": "^3.4.0",
     "vue-apexcharts": "^1.6.2",
     "vue-grid-layout": "^2.3.12",
