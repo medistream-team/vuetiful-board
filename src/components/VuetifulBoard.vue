@@ -1,15 +1,16 @@
 <template>
   <div class="vuetiful-board">
     <grid-layout
-      :layout.sync="gridInfos"
+      :layout.sync="gridInfosToRender"
       :col-num="colNum"
       :row-height="rowHeight"
       :is-draggable="layoutEditable"
       :is-resizable="layoutEditable"
       @layout-ready="layoutReady = true"
+      @layout-update="layoutUpdating = false"
     >
       <grid-item
-        v-for="(item, index) in gridInfos"
+        v-for="(item, index) in gridInfosToRender"
         :key="item.id"
         :x="item.x"
         :y="item.y"
@@ -20,22 +21,27 @@
       >
         <apex-charts
           v-if="layoutReady"
-          :key="chartInfos[index].id"
-          :type="chartInfos[index].options.type"
-          :series="chartInfos[index].series"
-          :options="chartInfos[index].options"
+          :key="chartInfosToRender[index].id"
+          :type="chartInfosToRender[index].options.type"
+          :series="chartInfosToRender[index].series"
+          :options="chartInfosToRender[index].options"
           width="100%"
           height="100%"
         />
       </grid-item>
     </grid-layout>
+    <infinite-loading @infinite="infiniteHandler" />
   </div>
 </template>
 
 <script>
 import palette from '../assets/palette.json';
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
+  components: {
+    InfiniteLoading,
+  },
   props: {
     theme: {
       type: String,
@@ -102,8 +108,13 @@ export default {
   data() {
     return {
       gridInfos: [],
+      gridInfosToRender: [],
+      currentGridInfoIndex: 0,
+      chartInfosToRender: [],
+      currentChartInfoIndex: 0,
       palette,
       layoutReady: false,
+      layoutUpdating: false,
       isFirstMount: true,
       darkModeColorOptions: {
         background: 'transparent',
@@ -331,6 +342,35 @@ export default {
       });
 
       return this.addUniqueId();
+    },
+    infiniteHandler($state) {
+      console.time(`infiniteHandler${this.currentGridInfoIndex}`);
+      const nextGridInfoIndex = this.currentGridInfoIndex + 1;
+      const nextChartInfoIndex = this.currentChartInfoIndex + 1;
+
+      if (nextGridInfoIndex >= this.gridInfos.length) {
+        $state.complete();
+        return;
+      }
+
+      if (nextChartInfoIndex >= this.chartInfos.length) {
+        $state.complete();
+        return;
+      }
+
+      if (this.layoutUpdating) {
+        return;
+      }
+
+      this.layoutUpdating = true;
+
+      this.gridInfosToRender.push(this.gridInfos[this.currentGridInfoIndex++]);
+      this.chartInfosToRender.push(
+        this.chartInfos[this.currentChartInfoIndex++],
+      );
+
+      $state.loaded();
+      console.timeEnd(`infiniteHandler${this.currentGridInfoIndex - 1}`);
     },
   },
 };
