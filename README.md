@@ -179,8 +179,8 @@ If no content is entered into the dataset, a basic chart form with no informatio
 
 ### theme
 
-<li>type:  <code>String</code></li>
-<li>default: <code>palette[0].name</code></li>
+<li>type:  <code>[String, Array]</code></li>
+<li>default: <code>'classic'</code></li>
 
 
 <br>
@@ -277,6 +277,17 @@ If you want to use color palette for theme, you can refer this page [palette.jso
 
 
 <br>
+
+### monochrome
+
+- type: `Object`
+- default: ```{
+  enabled: false,
+  color: '#255aee',
+  shadeIntensity: 0.65
+}```
+
+When monochrome is enabled, it takes precedence over the theme.
 
 ### darkMode
 
@@ -460,7 +471,10 @@ Vuetiful-board can be painted with monochrome. <br>When monochrome is selected, 
 
 ```javascript
 setMonochromeColor(event) {
-      this.theme = event.target.value;
+      this.monochrome = {
+        enabled: true,
+        color: event.target.value,
+      }
     },
 ```
 

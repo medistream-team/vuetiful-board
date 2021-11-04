@@ -23,6 +23,7 @@
  <button class="editBtn" @click="layoutEditable = !layoutEditable">🖊</button>
     <vuetiful-board
       :theme="theme"
+      :monochrome="monochrome"
       :dark-mode="darkMode"
       :col-num="colNum"
       :row-height="rowHeight"
@@ -490,6 +491,7 @@ export default {
   data() {
     return {
       theme: 'classic',
+      monochrome: undefined,
       darkMode: false,
       layoutEditable: true,
       colNum: 12,
@@ -505,7 +507,10 @@ export default {
       this.theme = themeName;
     },
     setMonochromeColor(event) {
-      this.theme = event.target.value;
+      this.monochrome = {
+        enabled: true,
+        color: event.target.value,
+      }
     },
   },
 }
@@ -553,7 +558,7 @@ export default {
     display: block;
     color: #232323;
     font-size: 14px;
-  } 
+  }
 }
 
 .editBtn {
