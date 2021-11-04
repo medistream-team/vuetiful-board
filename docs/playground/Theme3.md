@@ -20,6 +20,9 @@
 ```
 ```javascript
 setMonochromeColor(event) {
-  this.theme = event.target.value;
-},
+  this.monochrome = {
+    enabled: true,
+    color: event.target.value,
+  }
+}
 ```

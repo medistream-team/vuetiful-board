@@ -69,7 +69,10 @@ Vuetiful-board can be painted with monochrome. <br>When monochrome is selected, 
 
 ```javascript
 setMonochromeColor(event) {
-      this.theme = event.target.value;
+      this.monochrome = {
+        enabled: true,
+        color: event.target.value,
+      }
     },
 ```
 

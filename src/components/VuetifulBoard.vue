@@ -38,8 +38,20 @@ import palette from '../assets/palette.json';
 export default {
   props: {
     theme: {
-      type: String,
-      default: palette[0].name,
+      type: [String, Array],
+      required: false,
+      default: 'classic',
+    },
+    monochrome: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          enabled: false,
+          color: '#255aee',
+          shadeIntensity: 0.65,
+        };
+      },
     },
     darkMode: {
       type: Boolean,
@@ -122,27 +134,16 @@ export default {
 
       document.documentElement.dataset.theme = this.isDarkMode();
 
-      if (this.theme.startsWith('#')) {
-        const monochromeTheme = {
-          mode: this.isDarkMode(),
-          monochrome: {
-            enabled: this.isMonochromeMode(),
-            color: this.theme,
-            shadeTo: 'light',
-            shadeIntensity: 0.9,
-          },
-        };
-
+      if (Array.isArray(this.theme)) {
         const chartInfos = this.datasets.map(item => item.chartInfo);
+
         chartInfos.map(chartInfo => {
           chartInfo.id = this.$uuid.v4();
-          chartInfo.options.theme = monochromeTheme;
-          chartInfo.options.chart = this.darkMode
-            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
-            : {
-                ...this.lightModeColorOptions,
-                ...chartInfo.options.chart,
-              };
+          chartInfo.options.colors = [...this.theme];
+          chartInfo.options.theme = {
+            mode: this.isDarkMode(),
+            monochrome: { ...this.monochrome },
+          };
 
           return chartInfo;
         });
@@ -158,12 +159,9 @@ export default {
         chartInfo.options.colors = selectedTheme[0].colors;
         chartInfo.options.theme = {
           mode: this.isDarkMode(),
-          monochrome: {
-            enabled: this.isMonochromeMode(),
-            shadeTo: 'light',
-            shadeIntensity: 0.9,
-          },
+          monochrome: { ...this.monochrome },
         };
+
         chartInfo.options.chart = this.darkMode
           ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
           : {
@@ -274,9 +272,6 @@ export default {
     isDarkMode() {
       return this.darkMode ? 'dark' : 'light';
     },
-    isMonochromeMode() {
-      return this.theme.startsWith('#') ? true : false;
-    },
     savePreviousThemeColors(oldColors) {
       return (this.previousThemeColors = oldColors);
     },
@@ -285,12 +280,7 @@ export default {
 
       const currentThemeOptions = {
         mode: this.isDarkMode(),
-        monochrome: {
-          enabled: this.isMonochromeMode(),
-          color: this.theme,
-          shadeTo: 'light',
-          shadeIntensity: 0.9,
-        },
+        monochrome: { ...this.monochrome },
       };
 
       this.datasets.forEach(item => {
@@ -311,12 +301,7 @@ export default {
 
       const currentThemeOptions = {
         mode: this.isDarkMode(),
-        monochrome: {
-          enabled: this.isMonochromeMode(),
-          color: this.theme,
-          shadeTo: 'light',
-          shadeIntensity: 0.9,
-        },
+        monochrome: { ...this.monochrome },
       };
 
       this.datasets.forEach(item => {
@@ -346,7 +331,7 @@ export default {
 
   &:not(.vue-grid-placeholder) {
     border-radius: 13px;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0 4px 10px;
   }
 
   @media screen and (max-width: 768px) {
