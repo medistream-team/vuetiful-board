@@ -144,6 +144,12 @@ export default {
             mode: this.isDarkMode(),
             monochrome: { ...this.monochrome },
           };
+          chartInfo.options.chart = this.darkMode
+            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...chartInfo.options.chart,
+              };
 
           return chartInfo;
         });
