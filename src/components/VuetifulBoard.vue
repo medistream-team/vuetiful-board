@@ -40,7 +40,9 @@ export default {
     theme: {
       type: [String, Array],
       required: false,
-      default: 'classic',
+      default() {
+        return undefined;
+      },
     },
     monochrome: {
       type: Object,
@@ -133,6 +135,29 @@ export default {
       if (!this.layoutReady) return [];
 
       document.documentElement.dataset.theme = this.isDarkMode();
+
+      if (this.theme === undefined) {
+        const chartInfos = this.datasets.map(item => item.chartInfo);
+
+        chartInfos.map(chartInfo => {
+          chartInfo.id = this.$uuid.v4();
+          chartInfo.options.theme = {
+            mode: this.isDarkMode(),
+            monochrome: { ...this.monochrome },
+          };
+
+          chartInfo.options.chart = this.darkMode
+            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
+            : {
+                ...this.lightModeColorOptions,
+                ...chartInfo.options.chart,
+              };
+
+          return chartInfo;
+        });
+
+        return chartInfos;
+      }
 
       if (Array.isArray(this.theme)) {
         const chartInfos = this.datasets.map(item => item.chartInfo);
