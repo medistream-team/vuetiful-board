@@ -136,74 +136,58 @@ export default {
 
       document.documentElement.dataset.theme = this.isDarkMode();
 
-      if (this.theme === undefined) {
-        const chartInfos = this.datasets.map(item => item.chartInfo);
-
-        chartInfos.map(chartInfo => {
-          chartInfo.id = this.$uuid.v4();
-          chartInfo.options.theme = {
-            mode: this.isDarkMode(),
-            monochrome: { ...this.monochrome },
-          };
-
-          chartInfo.options.chart = this.darkMode
-            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
-            : {
-                ...this.lightModeColorOptions,
-                ...chartInfo.options.chart,
-              };
-
-          return chartInfo;
-        });
-
-        return chartInfos;
-      }
-
-      if (Array.isArray(this.theme)) {
-        const chartInfos = this.datasets.map(item => item.chartInfo);
-
-        chartInfos.map(chartInfo => {
-          chartInfo.id = this.$uuid.v4();
-          chartInfo.options.colors = [...this.theme];
-          chartInfo.options.theme = {
-            mode: this.isDarkMode(),
-            monochrome: { ...this.monochrome },
-          };
-          chartInfo.options.chart = this.darkMode
-            ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
-            : {
-                ...this.lightModeColorOptions,
-                ...chartInfo.options.chart,
-              };
-
-          return chartInfo;
-        });
-
-        return chartInfos;
-      }
-
       const chartInfos = this.datasets.map(item => item.chartInfo);
-      const selectedTheme = palette.filter(theme => this.theme === theme.name);
 
-      chartInfos.map(chartInfo => {
-        chartInfo.id = this.$uuid.v4();
-        chartInfo.options.colors = selectedTheme[0].colors;
-        chartInfo.options.theme = {
-          mode: this.isDarkMode(),
-          monochrome: { ...this.monochrome },
+      return chartInfos.map(chartInfo => {
+        const _chartInfo = {
+          ...chartInfo,
+          id: this.$uuid.v4(),
+          options: {
+            ...chartInfo.options,
+            theme: {
+              mode: this.isDarkMode(),
+              monochrome: { ...this.monochrome },
+            },
+            chart: this.darkMode
+              ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
+              : {
+                  ...this.lightModeColorOptions,
+                  ...chartInfo.options.chart,
+                },
+          },
         };
 
-        chartInfo.options.chart = this.darkMode
-          ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
-          : {
-              ...this.lightModeColorOptions,
-              ...chartInfo.options.chart,
-            };
+        if (this.themeToUse) {
+          _chartInfo.options.colors = this.themeToUse;
+        }
 
-        return chartInfo;
+        _chartInfo.options.chart = {
+          ..._chartInfo.options.chart,
+          events: {
+            mounted: (chartContext, config) => {
+              this.$emit('mounted', chartContext, config);
+            },
+            updated: (chartContext, config) => {
+              this.$emit('updated', chartContext, config);
+            },
+          },
+        };
+
+        return _chartInfo;
       });
+    },
+    themeToUse() {
+      if (this.theme === null) return undefined;
 
-      return chartInfos;
+      if (Array.isArray(this.theme)) {
+        return this.theme;
+      }
+
+      if (this.theme === undefined) {
+        return palette.find(_theme => _theme.name === 'classic')?.colors;
+      }
+
+      return palette.filter(theme => this.theme === theme.name)?.[0]?.colors;
     },
   },
   watch: {
