@@ -161,6 +161,17 @@ export default {
           _chartInfo.options.colors = this.themeToUse;
         }
 
+        _chartInfo.options.chart = {
+          ..._chartInfo.options.chart,
+          events: {
+            mounted: (chartContext, config) => {
+              this.$emit('mounted', chartContext, config);
+            },
+            updated: (chartContext, config) => {
+              this.$emit('updated', chartContext, config);
+            },
+          },
+        };
 
         return _chartInfo;
       });
