@@ -146,7 +146,9 @@ export default {
             ...chartInfo.options,
             theme: {
               mode: this.isDarkMode(),
-              monochrome: { ...this.monochrome },
+              monochrome: {
+                ...(chartInfo.options.theme?.monochrome || this.monochrome),
+              },
             },
             chart: this.darkMode
               ? { ...chartInfo.options.chart, ...this.darkModeColorOptions }
