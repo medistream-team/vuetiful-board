@@ -6,6 +6,9 @@
       :row-height="rowHeight"
       :is-draggable="layoutEditable"
       :is-resizable="layoutEditable"
+      :responsive="responsive"
+      :breakpoints="breakpoints"
+      :cols="cols"
       @layout-ready="layoutReady = true"
     >
       <grid-item
@@ -73,6 +76,37 @@ export default {
       type: Boolean,
       required: true,
       default: true,
+    },
+    responsive: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    breakpoints: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          lg: 1200,
+          md: 996,
+          sm: 768,
+          xs: 480,
+          xxs: 0,
+        };
+      },
+    },
+    cols: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          lg: 12,
+          md: 10,
+          sm: 6,
+          xs: 4,
+          xxs: 2,
+        };
+      },
     },
     datasets: {
       type: Array,
